@@ -8,12 +8,17 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AbsoluteDrive extends Command {
 	
+	
+	public AbsoluteDrive() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		Robot.robot.drive.arcadeDrive(OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY), OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX));
+		Robot.drive.driveHandler.arcadeDrive(OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY), OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX));
 		
 	}
 
