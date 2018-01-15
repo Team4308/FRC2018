@@ -1,9 +1,7 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
-import java.awt.List;
 import java.util.ArrayList;
 
-import org.usfirst.frc.team4308.robot.OI;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -12,10 +10,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
-	WPI_TalonSRX frontLeft,frontRight,rearLeft,rearRight;
+	public static WPI_TalonSRX frontLeft,frontRight,rearLeft,rearRight;
 	ArrayList<WPI_TalonSRX> driveMotors = new ArrayList<WPI_TalonSRX>();
 	SpeedControllerGroup leftDrive,rightDrive;
-	public static DifferentialDrive driveHandler;
+	public DifferentialDrive driveHandler;
+	
 	
 	public DriveTrain() {
 		// TODO Auto-generated constructor stub
@@ -28,13 +27,13 @@ public class DriveTrain extends Subsystem {
 		rearRight = new WPI_TalonSRX(RobotMap.Drive.rightBack);
 		driveMotors.add(rearRight);
 		
-		for(WPI_TalonSRX talon : driveMotors) {
-			talon.configOpenloopRamp(2, 0);
+		/*for(WPI_TalonSRX talon : driveMotors) {
+			talon.configOpenloopRamp(.5, 0);
 			talon.configContinuousCurrentLimit(10, 0);
 			talon.configPeakCurrentLimit(15, 0);
 			talon.configPeakCurrentDuration(100, 0);
 			talon.enableCurrentLimit(true);
-		}
+		}*/
 		
 		leftDrive = new SpeedControllerGroup(frontLeft,rearLeft);
 		rightDrive = new SpeedControllerGroup(frontRight,rearRight);

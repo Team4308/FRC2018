@@ -8,16 +8,20 @@
 package org.usfirst.frc.team4308.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4308.robot.auto.BlindAuto;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
 import org.usfirst.frc.team4308.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
+import org.usfirst.frc.team4308.robot.subsystems.USBVision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,13 +32,16 @@ import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
-	public static OI m_oi;
+	public static OI oi;
 	public static DriveTrain drive;
+	public static USBVision usb;
+	public static Gyroscope navx;
+	public static PowerDistributionPanel pdp;
 
 	public static String gameData;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -42,11 +49,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+
+		drive = new DriveTrain();
+		usb = new USBVision();		
+		navx = new Gyroscope();
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		oi = new OI();
+		autoChooser.addDefault("Default Auto", new ExampleCommand());
+		autoChooser.addObject("Blind Auto", new BlindAuto());
+		SmartDashboard.putData("Auto mode", autoChooser);
 
 	}
 
@@ -79,7 +90,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = autoChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -117,7 +128,10 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 
-		new AbsoluteDrive();
+		
+		new AbsoluteDrive(RobotMap.Control.Standard.leftY, RobotMap.Control.Standard.rightY).start();
+		
+		
 	}
 
 	/**
@@ -126,6 +140,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Left Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY));
+		SmartDashboard.putNumber("Right Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY));
+
+		SmartDashboard.putNumber("FrontLeftMotor Current", DriveTrain.frontLeft.getOutputCurrent());
+		SmartDashboard.putNumber("FrontRightMotor Current", DriveTrain.frontRight.getOutputCurrent());
+		SmartDashboard.putNumber("RearLeftMotor Current", DriveTrain.rearLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RearRightMotor Current", DriveTrain.rearRight.getOutputCurrent());
+		
+		//SmartDashboard.putNumber("Total Current", pdp.getTotalCurrent());
+		
 	}
 
 	/**
