@@ -21,6 +21,7 @@ import org.usfirst.frc.team4308.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
+import org.usfirst.frc.team4308.robot.subsystems.Intake;
 import org.usfirst.frc.team4308.robot.subsystems.USBVision;
 
 /**
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 	public static USBVision usb;
 	public static Gyroscope navx;
 	public static PowerDistributionPanel pdp;
+	public static Intake intake;
 
 	public static String gameData;
 
@@ -45,7 +47,7 @@ public class Robot extends TimedRobot {
 
 	/**
 	 * This function is run when the robot is first started up and should be used
-	 * for any initialization code.
+	 * for any initialisation code.
 	 */
 	@Override
 	public void robotInit() {
