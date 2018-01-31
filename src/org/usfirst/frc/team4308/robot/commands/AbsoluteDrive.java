@@ -7,29 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AbsoluteDrive extends Command {
 	
-	int leftStickID,rightStickID;
-	
-	public AbsoluteDrive(int leftStickID,int rightStickID) {
-		// TODO Auto-generated constructor stub
+	public AbsoluteDrive() {
 		requires(Robot.drive);
-		
-		this.leftStickID = leftStickID;
-		this.rightStickID = rightStickID;
 	}
 	
-	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-		super.execute();
-		
-		Robot.drive.driveHandler.tankDrive(-OI.driveStick.getRawAxis(leftStickID),-OI.driveStick.getRawAxis(rightStickID));
-		
+		Robot.drive.driveControl();
 	}
 
-	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	protected void end() {
+    		Robot.drive.stopMoving();
+    }
+	
+	protected void interrupted() {
+		Robot.drive.stopMoving();
 	}
 
 }

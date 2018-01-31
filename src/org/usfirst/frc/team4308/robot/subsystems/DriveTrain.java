@@ -2,7 +2,11 @@ package org.usfirst.frc.team4308.robot.subsystems;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team4308.robot.OI;
+import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
+import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -37,13 +41,32 @@ public class DriveTrain extends Subsystem {
 		
 		leftDrive = new SpeedControllerGroup(frontLeft,rearLeft);
 		rightDrive = new SpeedControllerGroup(frontRight,rearRight);
-		driveHandler = new DifferentialDrive(leftDrive, rightDrive);
+		rightDrive.setInverted(true);
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
+		setDefaultCommand(new AbsoluteDrive());
+	}
+	
+	public void driveControl() {
+//		Robot.pdp.clearStickyFaults();
+		tankDrive();
+	}
+	
+	public void tankDrive() {
+		leftDrive.set(OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY));
+		rightDrive.set(OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY));
+	}
+	
+	public void arcadeDrive() {
+//		leftDrive.set(RobotMap.Control.Standard.leftX);
+//		rightDrive.set(RobotMap.Control.Standard.rightX);
+	}
+	
+	public void stopMoving() {
+		leftDrive.set(0.0);
+		rightDrive.set(0.0);
 	}
 	
 
