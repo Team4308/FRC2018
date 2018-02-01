@@ -34,8 +34,8 @@ public class OI {
 		
 		A1.whenPressed(new Rotate(90.0));
 		B1.whenPressed(new Rotate(-90.0));
-		X1.whenPressed(new Move(5.0));
-		Y1.whenPressed(new Move(-5.0));
+		X1.whenPressed(new Move(4080*2));
+		//Y1.whenPressed(new Move(-2646.4864864865));
 		
 		Start1.whenPressed(new ResetSensors());
 		

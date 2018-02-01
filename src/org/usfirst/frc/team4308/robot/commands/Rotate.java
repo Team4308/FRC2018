@@ -22,10 +22,10 @@ public class Rotate extends Command {
 	
 	public Rotate(double angle) {
 		pid = new SynchronousPID();
-		pid.setOutputRange(-1.0, 1.0);
+		pid.setOutputRange(-0.5, 0.5);
 		SmartDashboard.putNumber("P Val", 0.02);
 	    	SmartDashboard.putNumber("I Val", 0.0);
-	    	SmartDashboard.putNumber("D Val", 0.03);
+	    	SmartDashboard.putNumber("D Val", 0.2);
 		
 	    	rotation = angle;
 	    	
@@ -38,7 +38,7 @@ public class Rotate extends Command {
 	protected void initialize() {
 		double Kp = SmartDashboard.getNumber("P Val", 0.02); 
 		double Ki = SmartDashboard.getNumber("I Val", 0.0);
-		double Kd = SmartDashboard.getNumber("D Val", 0.03);
+		double Kd = SmartDashboard.getNumber("D Val", 0.2);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();

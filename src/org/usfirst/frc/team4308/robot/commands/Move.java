@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.SynchronousPID;
+import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -21,11 +22,11 @@ public class Move extends Command {
 	private double movement;
 	
 	public Move(double displacement) {
-		pid = new SynchronousPID();
-		pid.setOutputRange(-1.0, 1.0);
-		SmartDashboard.putNumber("P Val", 0.02);
-	    	SmartDashboard.putNumber("I Val", 0.0);
-	    	SmartDashboard.putNumber("D Val", 0.03);
+		pid = new SynchronousPID();	
+		pid.setOutputRange(-0.5, 0.5);
+		SmartDashboard.putNumber("Move P Val", 0.02);
+	    SmartDashboard.putNumber("Move I Val", 0.0);
+	    SmartDashboard.putNumber("Move D Val", 0.2);
 		
 	    	movement = displacement;
 	    	
@@ -36,9 +37,9 @@ public class Move extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("P Val", 0.02); 
-		double Ki = SmartDashboard.getNumber("I Val", 0.0);
-		double Kd = SmartDashboard.getNumber("D Val", 0.03);
+		double Kp = SmartDashboard.getNumber("Move P Val", 0.0); 
+		double Ki = SmartDashboard.getNumber("Move I Val", 0.0);
+		double Kd = SmartDashboard.getNumber("Move D Val", 0.0);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
@@ -51,16 +52,23 @@ public class Move extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double calculationLeft = pid.calculate(Robot.drive.getLeftSensorPosition());
-		double calculationRight = pid.calculate(-Robot.drive.getRightSensorPosition());
 		
-		Robot.drive.setDrive(calculationLeft, calculationRight); // TODO - not working (robot keeps moving)
+		
+		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition()+Robot.drive.getRightSensorPosition())/2);
+		
+		
+		SmartDashboard.putNumber("Left Encoder Position", Robot.drive.getLeftSensorPosition());
+		SmartDashboard.putNumber("Left Encoder Velocity", Robot.drive.getRightSensorPosition());
+		SmartDashboard.putNumber("Right Encoder Position", DriveTrain.frontRight.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right Encoder Velocity", DriveTrain.frontRight.getSelectedSensorVelocity(0));
+		
+		Robot.drive.setDrive(calculation, calculation); // TODO - not working (robot keeps moving)
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(0.4) || isTimedOut();
+		return (Robot.drive.getLeftSensorPosition() > movement) && (Robot.drive.getRightSensorPosition() > movement);
 	}
 
 	// Called once after isFinished returns true

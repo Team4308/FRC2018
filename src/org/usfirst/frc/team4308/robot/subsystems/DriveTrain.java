@@ -71,16 +71,16 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Right X", rightX);
 		SmartDashboard.putNumber("Right Y", rightY);
 		
-		SmartDashboard.putNumber("Left Encoder Position", frontLeft.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("Left Encoder Velocity", frontLeft.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Left Encoder Position", getLeftSensorPosition());
+		SmartDashboard.putNumber("Left Encoder Velocity", getRightSensorPosition());
 		SmartDashboard.putNumber("Right Encoder Position", frontRight.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("Right Encoder Velocity", frontRight.getSelectedSensorVelocity(0));
 		
 		// Tank Drive
-//		setDrive(leftY, rightY); 
+		setDrive(-leftY,-rightY); 
 		
 		// Arcade Drive - Left Stick
-		setDrive(leftY + leftX, leftY - leftX);
+		//setDrive(-leftY + leftX, -leftY - leftX);
 		
 		// Arcade Drive - Left: Drive, Right: Steer
 //		setDrive(leftY + rightX, leftY - rightX);
@@ -98,7 +98,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getLeftSensorPosition() {
-		return frontLeft.getSelectedSensorPosition(0);
+		return (-1*frontLeft.getSelectedSensorPosition(0));
 	}
 	public double getRightSensorPosition() {
 		return frontRight.getSelectedSensorPosition(0);
