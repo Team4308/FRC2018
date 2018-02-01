@@ -12,13 +12,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 	public static WPI_TalonSRX frontLeft,frontRight,rearLeft,rearRight;
 	ArrayList<WPI_TalonSRX> driveMotors = new ArrayList<WPI_TalonSRX>();
 	SpeedControllerGroup leftDrive,rightDrive;
 	public DifferentialDrive driveHandler;
-	
 	
 	public DriveTrain() {
 		// TODO Auto-generated constructor stub
@@ -39,6 +39,11 @@ public class DriveTrain extends Subsystem {
 			talon.enableCurrentLimit(true);
 		}*/
 		
+		frontLeft.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+		frontLeft.setSensorPhase(false);
+		frontRight.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 0);
+		frontRight.setSensorPhase(false);
+		
 		leftDrive = new SpeedControllerGroup(frontLeft,rearLeft);
 		rightDrive = new SpeedControllerGroup(frontRight,rearRight);
 		rightDrive.setInverted(true);
@@ -49,24 +54,54 @@ public class DriveTrain extends Subsystem {
 		setDefaultCommand(new AbsoluteDrive());
 	}
 	
+	public void setDrive(double left, double right) {
+		leftDrive.set(left);
+		rightDrive.set(right);
+	}
+	
 	public void driveControl() {
 //		Robot.pdp.clearStickyFaults();
-		tankDrive();
-	}
-	
-	public void tankDrive() {
-		leftDrive.set(OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY));
-		rightDrive.set(OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY));
-	}
-	
-	public void arcadeDrive() {
-//		leftDrive.set(RobotMap.Control.Standard.leftX);
-//		rightDrive.set(RobotMap.Control.Standard.rightX);
+		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
+		double leftY = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
+		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightY = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		
+		SmartDashboard.putNumber("Left X", leftX);
+		SmartDashboard.putNumber("Left Y", leftY);
+		SmartDashboard.putNumber("Right X", rightX);
+		SmartDashboard.putNumber("Right Y", rightY);
+		
+		SmartDashboard.putNumber("Left Encoder Position", frontLeft.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Encoder Velocity", frontLeft.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Right Encoder Position", frontRight.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Right Encoder Velocity", frontRight.getSelectedSensorVelocity(0));
+		
+		// Tank Drive
+//		setDrive(leftY, rightY); 
+		
+		// Arcade Drive - Left Stick
+		setDrive(leftY + leftX, leftY - leftX);
+		
+		// Arcade Drive - Left: Drive, Right: Steer
+//		setDrive(leftY + rightX, leftY - rightX);
+		
 	}
 	
 	public void stopMoving() {
 		leftDrive.set(0.0);
 		rightDrive.set(0.0);
+	}
+	
+	public void resetSensors() {
+		frontLeft.setSelectedSensorPosition(0, 0, 0);
+		frontRight.setSelectedSensorPosition(0, 0, 0);
+	}
+	
+	public double getLeftSensorPosition() {
+		return frontLeft.getSelectedSensorPosition(0);
+	}
+	public double getRightSensorPosition() {
+		return frontRight.getSelectedSensorPosition(0);
 	}
 	
 
