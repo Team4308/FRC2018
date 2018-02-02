@@ -32,10 +32,10 @@ public class OI {
 	
 	public OI() {
 		
-		A1.whenPressed(new Rotate(90.0));
-		B1.whenPressed(new Rotate(-90.0));
-		X1.whenPressed(new Move(4080*2));
-		//Y1.whenPressed(new Move(-2646.4864864865));
+		A1.whenPressed(new Rotate(90.0)); //right
+		B1.whenPressed(new Rotate(-90.0)); //left
+		X1.whenPressed(new Move(60.0)); //forward
+		Y1.whenPressed(new Move(-60.0)); //back
 		
 		Start1.whenPressed(new ResetSensors());
 		

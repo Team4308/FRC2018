@@ -23,15 +23,22 @@ public class Move extends Command {
 	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
-		pid.setOutputRange(-0.5, 0.5);
-		SmartDashboard.putNumber("Move P Val", 0.02);
-	    SmartDashboard.putNumber("Move I Val", 0.0);
-	    SmartDashboard.putNumber("Move D Val", 0.2);
+		pid.setOutputRange(-0.3, 0.3);
+		
+		if (SmartDashboard.getNumber("Move P Val", -500.0) == -500.0) { // -500.0 is an arbitrary number
+			SmartDashboard.putNumber("Move P Val", 0.02); // P default value
+		}
+		if (SmartDashboard.getNumber("Move I Val", -500.0) == -500.0) {
+			SmartDashboard.putNumber("Move I Val", 0.0); // I default value
+		}
+		if (SmartDashboard.getNumber("Move D Val", -500.0) == -500.0) {
+			SmartDashboard.putNumber("Move D Val", 0.2); // D default value
+		}
 		
 	    	movement = displacement;
 	    	
 		requires(Robot.drive);
-		setTimeout(0.5);
+		setTimeout(2.0);
 	}
 
 	// Called just before this Command runs the first time
@@ -53,14 +60,12 @@ public class Move extends Command {
 	@Override
 	protected void execute() {
 		
-		
-		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition()+Robot.drive.getRightSensorPosition())/2);
-		
+		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
 		
 		SmartDashboard.putNumber("Left Encoder Position", Robot.drive.getLeftSensorPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity", Robot.drive.getRightSensorPosition());
-		SmartDashboard.putNumber("Right Encoder Position", DriveTrain.frontRight.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("Right Encoder Velocity", DriveTrain.frontRight.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Left Encoder Velocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Right Encoder Position", Robot.drive.getRightSensorPosition());
+		SmartDashboard.putNumber("Right Encoder Velocity", Robot.drive.frontRight.getSelectedSensorVelocity(0));
 		
 		Robot.drive.setDrive(calculation, calculation); // TODO - not working (robot keeps moving)
 	}
@@ -68,7 +73,7 @@ public class Move extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return (Robot.drive.getLeftSensorPosition() > movement) && (Robot.drive.getRightSensorPosition() > movement);
+		return pid.onTarget(2.0) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

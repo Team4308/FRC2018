@@ -22,15 +22,22 @@ public class Rotate extends Command {
 	
 	public Rotate(double angle) {
 		pid = new SynchronousPID();
-		pid.setOutputRange(-0.5, 0.5);
-		SmartDashboard.putNumber("P Val", 0.02);
-	    	SmartDashboard.putNumber("I Val", 0.0);
-	    	SmartDashboard.putNumber("D Val", 0.2);
+		pid.setOutputRange(-0.3, 0.3);
+
+		if (SmartDashboard.getNumber("P Val", -500.0) == -500.0) { // -500.0 is an arbitrary number
+			SmartDashboard.putNumber("P Val", 0.02); // P default value
+		}
+		if (SmartDashboard.getNumber("I Val", -500.0) == -500.0) {
+			SmartDashboard.putNumber("I Val", 0.0); // I default value
+		}
+		if (SmartDashboard.getNumber("D Val", -500.0) == -500.0) {
+			SmartDashboard.putNumber("D Val", 0.2); // D default value
+		}
 		
 	    	rotation = angle;
 	    	
 		requires(Robot.drive);
-		setTimeout(0.5);
+		setTimeout(1.0);
 	}
 
 	// Called just before this Command runs the first time
@@ -58,7 +65,7 @@ public class Rotate extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(0.4) || isTimedOut();
+		return pid.onTarget(1.5) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

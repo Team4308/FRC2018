@@ -20,7 +20,13 @@ public class DriveTrain extends Subsystem {
 	SpeedControllerGroup leftDrive,rightDrive;
 	public DifferentialDrive driveHandler;
 	
+	public static double ENCODER_TICKS_TO_INCHES;
+	
+	
 	public DriveTrain() {
+		
+		ENCODER_TICKS_TO_INCHES = Math.PI * 6/4080;
+		
 		// TODO Auto-generated constructor stub
 		frontLeft = new WPI_TalonSRX(RobotMap.Drive.leftFront);
 		driveMotors.add(frontLeft);
@@ -62,9 +68,9 @@ public class DriveTrain extends Subsystem {
 	public void driveControl() {
 //		Robot.pdp.clearStickyFaults();
 		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
-		double leftY = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
+		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
-		double rightY = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		SmartDashboard.putNumber("Left X", leftX);
 		SmartDashboard.putNumber("Left Y", leftY);
@@ -72,15 +78,15 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Right Y", rightY);
 		
 		SmartDashboard.putNumber("Left Encoder Position", getLeftSensorPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity", getRightSensorPosition());
-		SmartDashboard.putNumber("Right Encoder Position", frontRight.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Encoder Velocity", frontLeft.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Right Encoder Position", getRightSensorPosition());
 		SmartDashboard.putNumber("Right Encoder Velocity", frontRight.getSelectedSensorVelocity(0));
 		
 		// Tank Drive
-		setDrive(-leftY,-rightY); 
+//		setDrive(leftY, rightY); 
 		
 		// Arcade Drive - Left Stick
-		//setDrive(-leftY + leftX, -leftY - leftX);
+		setDrive(leftY + leftX, leftY - leftX);
 		
 		// Arcade Drive - Left: Drive, Right: Steer
 //		setDrive(leftY + rightX, leftY - rightX);
@@ -98,10 +104,10 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getLeftSensorPosition() {
-		return (-1*frontLeft.getSelectedSensorPosition(0));
+		return -frontLeft.getSelectedSensorPosition(0) * ENCODER_TICKS_TO_INCHES;
 	}
 	public double getRightSensorPosition() {
-		return frontRight.getSelectedSensorPosition(0);
+		return frontRight.getSelectedSensorPosition(0) * ENCODER_TICKS_TO_INCHES;
 	}
 	
 
