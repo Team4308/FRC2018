@@ -85,15 +85,15 @@ public class RobotMap {
 
 	// TODO: encoder channel correction
 	public static class Drive {
-		public static final int leftFront = 0;
-		public static final int leftBack = 2;
-		public static final int rightFront = 1;
+		public static final int leftFront = 5;
+		public static final int leftBack = 4;
+		public static final int rightFront = 2;
 		public static final int rightBack = 3;
 
-		public static final int leftShifterA = 2;
-		public static final int leftShifterB = 3;
-		public static final int rightShifterA = 4;
-		public static final int rightShifterB = 5;
+//		public static final int leftShifterA = 2;
+//		public static final int leftShifterB = 3;
+//		public static final int rightShifterA = 4;
+//		public static final int rightShifterB = 5;
 
 		public static class Slow {
 			public static final double normal = 1.0;
