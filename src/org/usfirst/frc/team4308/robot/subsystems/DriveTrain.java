@@ -72,16 +72,6 @@ public class DriveTrain extends Subsystem {
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-		SmartDashboard.putNumber("Left X", leftX);
-		SmartDashboard.putNumber("Left Y", leftY);
-		SmartDashboard.putNumber("Right X", rightX);
-		SmartDashboard.putNumber("Right Y", rightY);
-		
-		SmartDashboard.putNumber("Left Encoder Position", getLeftSensorPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity", frontLeft.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Right Encoder Position", getRightSensorPosition());
-		SmartDashboard.putNumber("Right Encoder Velocity", frontRight.getSelectedSensorVelocity(0));
-		
 		// Tank Drive
 //		setDrive(leftY, rightY); 
 		
