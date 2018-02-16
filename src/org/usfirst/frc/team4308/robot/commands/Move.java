@@ -62,7 +62,7 @@ public class Move extends Command {
 		
 		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
 		
-		Robot.drive.setDrive(calculation, calculation); // TODO - not working (robot keeps moving)
+		Robot.drive.setDrive(calculation, calculation);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
