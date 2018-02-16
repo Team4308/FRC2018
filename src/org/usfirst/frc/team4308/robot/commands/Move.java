@@ -62,11 +62,6 @@ public class Move extends Command {
 		
 		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
 		
-		SmartDashboard.putNumber("Left Encoder Position", Robot.drive.getLeftSensorPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Right Encoder Position", Robot.drive.getRightSensorPosition());
-		SmartDashboard.putNumber("Right Encoder Velocity", Robot.drive.frontRight.getSelectedSensorVelocity(0));
-		
 		Robot.drive.setDrive(calculation, calculation); // TODO - not working (robot keeps moving)
 	}
 

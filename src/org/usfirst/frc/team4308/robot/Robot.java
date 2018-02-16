@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
-//		pdp = new PowerDistributionPanel(0);
+		pdp = new PowerDistributionPanel(0);
 		drive = new DriveTrain();
 //		usb = new USBVision();		
 		navx = new Gyroscope();
@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	/**
@@ -130,6 +131,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	@Override
@@ -148,19 +150,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
-		SmartDashboard.putNumber("Gyro Angle", navx.gyro.getAngle());
-		SmartDashboard.putNumber("Gyro Displacement X", navx.gyro.getDisplacementX());
-		SmartDashboard.putNumber("Gyro Displacement Y", navx.gyro.getDisplacementY());
-		SmartDashboard.putNumber("Gyro Displacement Z", navx.gyro.getDisplacementZ());
-
-		SmartDashboard.putNumber("FrontLeftMotor Current", DriveTrain.frontLeft.getOutputCurrent());
-		SmartDashboard.putNumber("FrontRightMotor Current", DriveTrain.frontRight.getOutputCurrent());
-		SmartDashboard.putNumber("RearLeftMotor Current", DriveTrain.rearLeft.getOutputCurrent());
-		SmartDashboard.putNumber("RearRightMotor Current", DriveTrain.rearRight.getOutputCurrent());
-		
-		//SmartDashboard.putNumber("Total Current", pdp.getTotalCurrent());
-		
+		Logger.log();
 	}
 
 	/**
