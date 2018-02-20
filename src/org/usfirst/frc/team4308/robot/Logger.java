@@ -4,45 +4,37 @@ import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Logger {
-	
-	private class Stick {
-		public double x;
-		public double y;
-	}
-	
-	static Stick left;
-	static Stick right;
+public class Logger {	
 	
 	public static void log() {
 		
-		left.x = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
-		left.y = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
-		right.x = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
-		right.y = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
+		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
+		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		
-		SmartDashboard.putNumber("leftX", left.x);
-		SmartDashboard.putNumber("Left Y", left.y);
-		SmartDashboard.putNumber("Right X", right.x);
-		SmartDashboard.putNumber("Right Y", right.y);
+		SmartDashboard.putNumber("LeftX", leftX);
+		SmartDashboard.putNumber("LeftY", leftY);
+		SmartDashboard.putNumber("RightX", rightX);
+		SmartDashboard.putNumber("RightY", rightY);
 		
-		SmartDashboard.putNumber("Left Encoder Position", Robot.drive.getLeftSensorPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Right Encoder Position", Robot.drive.getRightSensorPosition());
-		SmartDashboard.putNumber("Right Encoder Velocity", Robot.drive.frontRight.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("LeftEncoderPosition", Robot.drive.getLeftSensorPosition());
+		SmartDashboard.putNumber("LeftEncoderVelocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("RightEncoderPosition", Robot.drive.getRightSensorPosition());
+		SmartDashboard.putNumber("RightEncoderVelocity", Robot.drive.frontRight.getSelectedSensorVelocity(0));
 		
-		SmartDashboard.putNumber("Gyro Angle", Robot.navx.gyro.getAngle());
-		SmartDashboard.putNumber("Gyro Displacement X", Robot.navx.gyro.getDisplacementX());
-		SmartDashboard.putNumber("Gyro Displacement Y", Robot.navx.gyro.getDisplacementY());
-		SmartDashboard.putNumber("Gyro Displacement Z", Robot.navx.gyro.getDisplacementZ());
+		SmartDashboard.putNumber("GyroAngle", Robot.navx.gyro.getAngle());
+		SmartDashboard.putNumber("GyroDisplacement X", Robot.navx.gyro.getDisplacementX());
+		SmartDashboard.putNumber("GyroDisplacement Y", Robot.navx.gyro.getDisplacementY());
+		SmartDashboard.putNumber("GyroDisplacement Z", Robot.navx.gyro.getDisplacementZ());
 
-		SmartDashboard.putNumber("FrontLeftMotor Current", DriveTrain.frontLeft.getOutputCurrent());
-		SmartDashboard.putNumber("FrontRightMotor Current", DriveTrain.frontRight.getOutputCurrent());
-		SmartDashboard.putNumber("RearLeftMotor Current", DriveTrain.rearLeft.getOutputCurrent());
-		SmartDashboard.putNumber("RearRightMotor Current", DriveTrain.rearRight.getOutputCurrent());
+		SmartDashboard.putNumber("FrontLeftMotorCurrent", DriveTrain.frontLeft.getOutputCurrent());
+		SmartDashboard.putNumber("FrontRightMotorCurrent", DriveTrain.frontRight.getOutputCurrent());
+		SmartDashboard.putNumber("RearLeftMotorCurrent", DriveTrain.rearLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RearRightMotorCurrent", DriveTrain.rearRight.getOutputCurrent());
 		
-		SmartDashboard.putNumber("Total Current", Robot.pdp.getTotalCurrent());
+		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
 	}
 	

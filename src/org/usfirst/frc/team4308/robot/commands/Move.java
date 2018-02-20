@@ -23,17 +23,7 @@ public class Move extends Command {
 	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
-		pid.setOutputRange(-0.3, 0.3);
-		
-		if (SmartDashboard.getNumber("Move P Val", -500.0) == -500.0) { // -500.0 is an arbitrary number
-			SmartDashboard.putNumber("Move P Val", 0.02); // P default value
-		}
-		if (SmartDashboard.getNumber("Move I Val", -500.0) == -500.0) {
-			SmartDashboard.putNumber("Move I Val", 0.0); // I default value
-		}
-		if (SmartDashboard.getNumber("Move D Val", -500.0) == -500.0) {
-			SmartDashboard.putNumber("Move D Val", 0.2); // D default value
-		}
+		pid.setOutputRange(-0.5, 0.5);
 		
 	    	movement = displacement;
 	    	
@@ -44,9 +34,9 @@ public class Move extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("Move P Val", 0.0); 
-		double Ki = SmartDashboard.getNumber("Move I Val", 0.0);
-		double Kd = SmartDashboard.getNumber("Move D Val", 0.0);
+		double Kp = SmartDashboard.getNumber("MoveP", 0.02); 
+		double Ki = SmartDashboard.getNumber("MoveI", 0.0);
+		double Kd = SmartDashboard.getNumber("MoveD", 0.2);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
@@ -60,6 +50,7 @@ public class Move extends Command {
 	@Override
 	protected void execute() {
 		
+		// Currently average to prevent weird movement
 		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
 		
 		Robot.drive.setDrive(calculation, calculation);
