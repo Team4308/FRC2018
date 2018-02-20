@@ -21,8 +21,8 @@ public class RobotMap {
 
 	public static final double encoderPulseDistance = 0.042;
 
-	public static final int PCM_ID = 9;
-	public static final int PDP_ID = 8;
+	public static final int PCM_ID = 11;
+	public static final int PDP_ID = 0;
 
 	public static final double kAutonomousTime = 15.0;
 	public static final double kTeleoperatedTime = 120.0;
