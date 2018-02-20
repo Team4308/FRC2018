@@ -17,9 +17,7 @@ public class Intake extends Subsystem {
 	
 	
 	public static Compressor c;
-	public static  DoubleSolenoid intake;
-	
-
+	public static DoubleSolenoid intake;
 	
 	public Intake() {
 		// TODO Auto-generated constructor stub

@@ -21,18 +21,24 @@ public class RobotMap {
 
 	public static final double encoderPulseDistance = 0.042;
 
-	public static final int PCM_ID = 11;
+	public static final int PCM_ID = 1;
 	public static final int PDP_ID = 0;
 
 	public static final double kAutonomousTime = 15.0;
 	public static final double kTeleoperatedTime = 120.0;
 
-	public static class GearArm {
+	public static class Intake {
 		public static final int solenoidA = 0;
 		public static final int solenoidB = 1;
-		public static final int armChannel = 4;
+		public static final int intakeLeft = 4;
+		public static final int intakeRight = 5;
 		public static final double speedUp = -0.15;
 		public static final double speedDown = 0.75;
+	}
+	
+	public static class Conveyor {
+		public static final int conveyorLeft = 6;
+		public static final int conveyorRight = 7;
 	}
 
 	public static class Autonomous {
@@ -83,17 +89,11 @@ public class RobotMap {
 
 	}
 
-	// TODO: encoder channel correction
 	public static class Drive {
-		public static final int leftFront = 5;
-		public static final int leftBack = 4;
-		public static final int rightFront = 2;
-		public static final int rightBack = 3;
-
-//		public static final int leftShifterA = 2;
-//		public static final int leftShifterB = 3;
-//		public static final int rightShifterA = 4;
-//		public static final int rightShifterB = 5;
+		public static final int leftFront = 3;
+		public static final int leftBack = 2;
+		public static final int rightFront = 1;
+		public static final int rightBack = 0;
 
 		public static class Slow {
 			public static final double normal = 1.0;
@@ -110,11 +110,8 @@ public class RobotMap {
 	}
 
 	public static class Climb {
-		public static final int climbChannel = 7;
-		public static final int gearArmChannel = 5;
-
-		public static final int climbA = 0;
-		public static final int climbB = 1;
+		public static final int climbLeft = 8;
+		public static final int climbRight = 9;
 
 		public static final double maxForward = 0.65;
 		public static final double maxBackward = -0.4;
