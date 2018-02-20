@@ -12,12 +12,11 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4308.robot.auto.BlindAuto;
-import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
-import org.usfirst.frc.team4308.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4308.robot.commands.Auto;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
@@ -52,14 +51,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
+		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
+		LiveWindow.disableAllTelemetry();
+		
 		drive = new DriveTrain();
-		usb = new USBVision();		
+//		usb = new USBVision();		
 		navx = new Gyroscope();
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		oi = new OI();
-		autoChooser.addDefault("Default Auto", new ExampleCommand());
-		autoChooser.addObject("Blind Auto", new BlindAuto());
-		SmartDashboard.putData("Auto mode", autoChooser);
+		
+//		autoChooser.addDefault("Default Auto", new ExampleCommand());
+//		autoChooser.addObject("Blind Auto", new BlindAuto());
+//		SmartDashboard.putData("Auto mode", autoChooser);
 
 	}
 
@@ -76,6 +78,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	/**
@@ -92,7 +95,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = autoChooser.getSelected();
+//		m_autonomousCommand = autoChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -105,10 +108,25 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
-
+		
+		Auto auto = new Auto();
+		auto.start();
+		
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if (gameData.charAt(0) == 'L') {
+			// Left side is our alliance switch
+			
 		} else {
+			// Right side is our alliance switch
 
+		}
+		
+		if (gameData.charAt(2) == 'L') {
+			// Left side is our alliance switch
+		
+		} else {
+			// Right side is our alliance switch
+			
 		}
 	}
 
@@ -118,20 +136,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		// Stops auto when teleop starts
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-
-		
-		new AbsoluteDrive(RobotMap.Control.Standard.leftY, RobotMap.Control.Standard.rightY).start();
 		
 		
 	}
@@ -142,16 +155,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY));
-		SmartDashboard.putNumber("Right Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY));
-
-		SmartDashboard.putNumber("FrontLeftMotor Current", DriveTrain.frontLeft.getOutputCurrent());
-		SmartDashboard.putNumber("FrontRightMotor Current", DriveTrain.frontRight.getOutputCurrent());
-		SmartDashboard.putNumber("RearLeftMotor Current", DriveTrain.rearLeft.getOutputCurrent());
-		SmartDashboard.putNumber("RearRightMotor Current", DriveTrain.rearRight.getOutputCurrent());
-		
-		//SmartDashboard.putNumber("Total Current", pdp.getTotalCurrent());
-		
+		Logger.log();
 	}
 
 	/**

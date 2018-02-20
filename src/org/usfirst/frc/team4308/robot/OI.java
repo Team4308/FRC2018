@@ -7,7 +7,12 @@
 
 package org.usfirst.frc.team4308.robot;
 
+import org.usfirst.frc.team4308.robot.commands.Move;
+import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.commands.Rotate;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,6 +22,26 @@ public class OI {
 	
 	public static Joystick driveStick = new Joystick(0);
 	public static Joystick helperStick = new Joystick(1);
+	
+	private JoystickButton A1 = new JoystickButton(driveStick, RobotMap.Control.Standard.a);
+	private JoystickButton B1 = new JoystickButton(driveStick, RobotMap.Control.Standard.b);
+	private JoystickButton X1 = new JoystickButton(driveStick, RobotMap.Control.Standard.x);
+	private JoystickButton Y1 = new JoystickButton(driveStick, RobotMap.Control.Standard.y);
+	
+	private JoystickButton Start1 = new JoystickButton(driveStick, RobotMap.Control.Standard.start);
+	
+	public OI() {
+		
+		A1.whenPressed(new Rotate(90.0)); //right
+		B1.whenPressed(new Rotate(-90.0)); //left
+		X1.whenPressed(new Move(60.0)); //forward
+		Y1.whenPressed(new Move(-60.0)); //back
+		
+		Start1.whenPressed(new ResetSensors());
+		
+	}
+	
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Gyroscope extends Subsystem {
 
-	AHRS gyro;
+	public AHRS gyro;
 	
 	public Gyroscope() {
 		gyro = new AHRS(SPI.Port.kMXP);
