@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
 //		usb = new USBVision();		
 		navx = new Gyroscope();
 		oi = new OI();
+		intake = new Intake();
 		
 //		autoChooser.addDefault("Default Auto", new ExampleCommand());
 //		autoChooser.addObject("Blind Auto", new BlindAuto());

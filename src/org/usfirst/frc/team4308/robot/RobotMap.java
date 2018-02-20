@@ -28,10 +28,10 @@ public class RobotMap {
 	public static final double kTeleoperatedTime = 120.0;
 
 	public static class Intake {
-		public static final int solenoidA = 0;
-		public static final int solenoidB = 1;
-		public static final int intakeLeft = 4;
-		public static final int intakeRight = 5;
+		public static final int solenoidForward = 0;
+		public static final int solenoidReverse = 1;
+		public static final int intakeLeft = 5;
+		public static final int intakeRight = 4;
 		public static final double speedUp = -0.15;
 		public static final double speedDown = 0.75;
 	}

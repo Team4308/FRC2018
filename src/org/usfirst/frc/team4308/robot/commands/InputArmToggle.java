@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class InputArmToggle extends Command {
+	
 	PincerState state;
 	
 	public InputArmToggle() {
@@ -27,8 +28,6 @@ public class InputArmToggle extends Command {
 			Intake.intake.set(DoubleSolenoid.Value.kForward);
 			state = PincerState.CLOSE;
 		}
-		
-		
 		
 	}
 
