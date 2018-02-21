@@ -3,7 +3,6 @@ package org.usfirst.frc.team4308.robot.subsystems;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team4308.robot.OI;
-import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
 
@@ -12,12 +11,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
-	public static WPI_TalonSRX frontLeft,frontRight,rearLeft,rearRight;
+	public WPI_TalonSRX frontLeft;
+	public WPI_TalonSRX frontRight;
+	public WPI_TalonSRX rearLeft;
+	public WPI_TalonSRX rearRight;
 	ArrayList<WPI_TalonSRX> driveMotors = new ArrayList<WPI_TalonSRX>();
-	SpeedControllerGroup leftDrive,rightDrive;
+	public SpeedControllerGroup leftDrive,rightDrive;
 	public DifferentialDrive driveHandler;
 	
 	public static double ENCODER_TICKS_TO_INCHES;
@@ -76,10 +77,10 @@ public class DriveTrain extends Subsystem {
 //		setDrive(leftY, rightY); 
 		
 		// Arcade Drive - Left Stick
-		setDrive(leftY + leftX, leftY - leftX);
+//		setDrive(leftY + leftX, leftY - leftX);
 		
 		// Arcade Drive - Left: Drive, Right: Steer
-//		setDrive(leftY + rightX, leftY - rightX);
+		setDrive(leftY + rightX, leftY - rightX);
 		
 	}
 	

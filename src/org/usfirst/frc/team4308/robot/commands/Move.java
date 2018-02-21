@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.SynchronousPID;
-import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 
 /**
  * An example command.  You can replace me with your own command.

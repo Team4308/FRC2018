@@ -10,6 +10,8 @@ package org.usfirst.frc.team4308.robot;
 import org.usfirst.frc.team4308.robot.commands.Move;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.commands.Rotate;
+import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
+import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -28,14 +30,20 @@ public class OI {
 	private JoystickButton X1 = new JoystickButton(driveStick, RobotMap.Control.Standard.x);
 	private JoystickButton Y1 = new JoystickButton(driveStick, RobotMap.Control.Standard.y);
 	
+	private JoystickButton LB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.leftBumper);
+	private JoystickButton RB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.rightBumper);
+	
 	private JoystickButton Start1 = new JoystickButton(driveStick, RobotMap.Control.Standard.start);
 	
 	public OI() {
 		
-		A1.whenPressed(new Rotate(90.0)); //right
-		B1.whenPressed(new Rotate(-90.0)); //left
-		X1.whenPressed(new Move(60.0)); //forward
-		Y1.whenPressed(new Move(-60.0)); //back
+		A1.whenPressed(new IntakeToggle(ToggleType.SWITCH));
+		B1.whenPressed(new Rotate(90.0));
+		X1.whenPressed(new Rotate(-90.0));
+		Y1.whenPressed(new Move(24.0));
+
+		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
+		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
 		Start1.whenPressed(new ResetSensors());
 		
