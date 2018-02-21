@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4308.robot;
 
+import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Logger {	
@@ -33,6 +35,8 @@ public class Logger {
 		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
 		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
+		
+		SmartDashboard.putNumber("IntakeState", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
 		
 	}
 	
