@@ -24,11 +24,7 @@ public class IntakeToggle extends Command {
 		super.execute();
 		
 		if (setToggle == ToggleType.SWITCH) {
-			if (Robot.intake.state == IntakeState.CLOSE) {
-				Robot.intake.openIntake();
-			} else {
-				Robot.intake.closeIntake();
-			}
+			Robot.intake.switchIntake();
 		}
 		else if (setToggle == ToggleType.OPEN) {
 			Robot.intake.openIntake();

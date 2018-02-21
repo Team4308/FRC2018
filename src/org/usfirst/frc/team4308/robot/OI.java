@@ -41,9 +41,9 @@ public class OI {
 		B1.whenPressed(new Rotate(90.0));
 		X1.whenPressed(new Rotate(-90.0));
 		Y1.whenPressed(new Move(24.0));
-		
-		LB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
-		RB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
+
+		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
+		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
 		Start1.whenPressed(new ResetSensors());
 		
