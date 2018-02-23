@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4308.robot.commands;
 
 import org.usfirst.frc.team4308.robot.Robot;
-import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
