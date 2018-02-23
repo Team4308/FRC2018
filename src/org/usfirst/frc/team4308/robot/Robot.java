@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
-import org.usfirst.frc.team4308.robot.commands.Auto;
+import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 		
-		Auto auto = new Auto();
+		TestPath auto = new TestPath();
 		auto.start();
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
