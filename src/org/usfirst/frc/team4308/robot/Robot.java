@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import org.usfirst.frc.team4308.robot.auto.TestPath;
+import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
@@ -39,10 +39,9 @@ public class Robot extends TimedRobot {
 	public static Intake intake;
 
 	public static String gameData;
-
-	Command m_autonomousCommand;
-	SendableChooser<Command> autoChooser = new SendableChooser<>();
-
+	
+	private Command auto;
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialisation code.
@@ -59,10 +58,6 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		intake = new Intake();
 		
-//		autoChooser.addDefault("Default Auto", new ExampleCommand());
-//		autoChooser.addObject("Blind Auto", new BlindAuto());
-//		SmartDashboard.putData("Auto mode", autoChooser);
-
 	}
 
 	/**
@@ -72,7 +67,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		Command reset = new ResetSensors();
+		reset.start();
 	}
 
 	@Override
@@ -95,21 +91,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-//		m_autonomousCommand = autoChooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
 		
-		TestPath auto = new TestPath();
+		auto = new TestPath();
 		auto.start();
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -142,10 +125,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		// Stops auto when teleop starts
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		if (auto != null) {
+			auto.cancel();
 		}
-		
 		
 	}
 

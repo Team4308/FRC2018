@@ -20,6 +20,9 @@ public class Move extends Command {
 	private SynchronousPID pid;
 	private double movement;
 	
+	private double leftStartPos;
+	private double rightStartPos;
+	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
 		pid.setOutputRange(-0.5, 0.5);
@@ -41,7 +44,8 @@ public class Move extends Command {
 		pid.reset();
 		pid.setSetpoint(movement);
 		
-		Robot.drive.resetSensors();
+		leftStartPos = Robot.drive.getLeftSensorPosition();
+		rightStartPos = Robot.drive.getRightSensorPosition();
 		
 	}
 
@@ -50,7 +54,10 @@ public class Move extends Command {
 	protected void execute() {
 		
 		// Currently average to prevent weird movement
-		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
+		double leftError = Robot.drive.getLeftSensorPosition() - leftStartPos;
+		double rightError = Robot.drive.getRightSensorPosition() - rightStartPos;
+		
+		double calculation = pid.calculate((leftError + rightError)/2);
 		
 		Robot.drive.setDrive(calculation, calculation);
 	}

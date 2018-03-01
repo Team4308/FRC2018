@@ -20,6 +20,8 @@ public class Rotate extends Command {
 	private SynchronousPID pid;
 	private double rotation;
 	
+	private double startRotation;
+	
 	public Rotate(double angle) {
 		pid = new SynchronousPID();
 		pid.setOutputRange(-0.5, 0.5);
@@ -41,13 +43,16 @@ public class Rotate extends Command {
 		pid.reset();
 		pid.setSetpoint(rotation);
 		
-		Robot.navx.gyro.reset();
+		startRotation = Robot.navx.gyro.getAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double calculation = pid.calculate(Robot.navx.gyro.getAngle());
+		
+		double angleError = Robot.navx.gyro.getAngle() - startRotation;
+		
+		double calculation = pid.calculate(angleError);
 		
 		Robot.drive.setDrive(calculation, -calculation);
 	}
