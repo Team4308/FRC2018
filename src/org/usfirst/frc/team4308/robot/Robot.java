@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 	public static Gyroscope navx;
 	public static PowerDistributionPanel pdp;
 	public static Intake intake;
+	public static Conveyor conveyor;
 
 	public static String gameData;
 	
@@ -57,6 +59,7 @@ public class Robot extends TimedRobot {
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
+		conveyor = new Conveyor();
 		
 	}
 
