@@ -1,11 +1,11 @@
-package org.usfirst.frc.team4308.robot.commands;
+package org.usfirst.frc.team4308.robot.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class Auto extends CommandGroup {
+public class TestPath extends CommandGroup {
 
-	public Auto() {
+	public TestPath() {
 		
 		addSequential(new Move(60.0));
 		addSequential(new Rotate(-90.0));

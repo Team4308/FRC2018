@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4308.robot.commands;
+package org.usfirst.frc.team4308.robot.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,49 +16,51 @@ import org.usfirst.frc.team4308.robot.SynchronousPID;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Move extends Command {
+public class Rotate extends Command {
 	private SynchronousPID pid;
-	private double movement;
+	private double rotation;
 	
-	public Move(double displacement) {
-		pid = new SynchronousPID();	
+	private double startRotation;
+	
+	public Rotate(double angle) {
+		pid = new SynchronousPID();
 		pid.setOutputRange(-0.5, 0.5);
 		
-	    	movement = displacement;
+	    	rotation = angle;
 	    	
 		requires(Robot.drive);
-		setTimeout(2.0);
+		setTimeout(1.5);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("MoveP", 0.02); 
-		double Ki = SmartDashboard.getNumber("MoveI", 0.0);
-		double Kd = SmartDashboard.getNumber("MoveD", 0.2);
+		double Kp = SmartDashboard.getNumber("RotateP", 0.02); 
+		double Ki = SmartDashboard.getNumber("RotateI", 0.0);
+		double Kd = SmartDashboard.getNumber("RotateD", 0.2);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
-		pid.setSetpoint(movement);
+		pid.setSetpoint(rotation);
 		
-		Robot.drive.resetSensors();
-		
+		startRotation = Robot.navx.gyro.getAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		
-		// Currently average to prevent weird movement
-		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
+		double angleError = Robot.navx.gyro.getAngle() - startRotation;
 		
-		Robot.drive.setDrive(calculation, calculation);
+		double calculation = pid.calculate(angleError);
+		
+		Robot.drive.setDrive(calculation, -calculation);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(2.0) || isTimedOut();
+		return pid.onTarget(0.5) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

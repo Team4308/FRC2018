@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4308.robot.commands;
+package org.usfirst.frc.team4308.robot.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,46 +16,56 @@ import org.usfirst.frc.team4308.robot.SynchronousPID;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class Rotate extends Command {
+public class Move extends Command {
 	private SynchronousPID pid;
-	private double rotation;
+	private double movement;
 	
-	public Rotate(double angle) {
-		pid = new SynchronousPID();
+	private double leftStartPos;
+	private double rightStartPos;
+	
+	public Move(double displacement) {
+		pid = new SynchronousPID();	
 		pid.setOutputRange(-0.5, 0.5);
 		
-	    	rotation = angle;
+	    	movement = displacement;
 	    	
 		requires(Robot.drive);
-		setTimeout(1.5);
+		setTimeout(2.0);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("RotateP", 0.02); 
-		double Ki = SmartDashboard.getNumber("RotateI", 0.0);
-		double Kd = SmartDashboard.getNumber("RotateD", 0.2);
+		double Kp = SmartDashboard.getNumber("MoveP", 0.02); 
+		double Ki = SmartDashboard.getNumber("MoveI", 0.0);
+		double Kd = SmartDashboard.getNumber("MoveD", 0.2);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
-		pid.setSetpoint(rotation);
+		pid.setSetpoint(movement);
 		
-		Robot.navx.gyro.reset();
+		leftStartPos = Robot.drive.getLeftSensorPosition();
+		rightStartPos = Robot.drive.getRightSensorPosition();
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double calculation = pid.calculate(Robot.navx.gyro.getAngle());
 		
-		Robot.drive.setDrive(calculation, -calculation);
+		// Currently average to prevent weird movement
+		double leftError = Robot.drive.getLeftSensorPosition() - leftStartPos;
+		double rightError = Robot.drive.getRightSensorPosition() - rightStartPos;
+		
+		double calculation = pid.calculate((leftError + rightError)/2);
+		
+		Robot.drive.setDrive(calculation, calculation);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(0.5) || isTimedOut();
+		return pid.onTarget(2.0) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true
