@@ -3,6 +3,7 @@ package org.usfirst.frc.team4308.robot.subsystems;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team4308.robot.OI;
+import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
 
@@ -67,7 +68,9 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void driveControl() {
-//		Robot.pdp.clearStickyFaults();
+		
+		Robot.pdp.clearStickyFaults();
+		
 		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);

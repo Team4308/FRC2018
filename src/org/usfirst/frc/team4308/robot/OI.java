@@ -7,9 +7,9 @@
 
 package org.usfirst.frc.team4308.robot;
 
-import org.usfirst.frc.team4308.robot.commands.Move;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
-import org.usfirst.frc.team4308.robot.commands.Rotate;
+import org.usfirst.frc.team4308.robot.auto.Move;
+import org.usfirst.frc.team4308.robot.auto.Rotate;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
 
