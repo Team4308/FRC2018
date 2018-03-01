@@ -12,6 +12,7 @@ import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
+import org.usfirst.frc.team4308.robot.commands.PullConveyor;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -38,9 +39,13 @@ public class OI {
 	public OI() {
 		
 		A1.whenPressed(new IntakeToggle(ToggleType.SWITCH));
-		B1.whenPressed(new Rotate(90.0));
-		X1.whenPressed(new Rotate(-90.0));
-		Y1.whenPressed(new Move(24.0));
+		B1.whileHeld(new PullConveyor(true));
+		X1.whileHeld(new PullConveyor(false));
+		Y1.whenPressed(new Rotate(90.0));
+		
+//		B1.whenPressed(new Rotate(90.0));
+//		X1.whenPressed(new Rotate(-90.0));
+//		Y1.whenPressed(new Move(24.0));
 
 		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));

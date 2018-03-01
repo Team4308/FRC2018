@@ -31,5 +31,10 @@ public class Conveyor extends Subsystem {
 		conveyorLeft.set(0);
 		conveyorRight.set(0);
 	}
+	
+	public void moveConveyor(double move) {
+		conveyorLeft.set(move);
+		conveyorRight.set(move);
+	}
 
 }
