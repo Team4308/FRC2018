@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
 import org.usfirst.frc.team4308.robot.OI;
-import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteIntake;
-import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 

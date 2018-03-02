@@ -32,15 +32,15 @@ public class RobotMap {
 		public static final int solenoidLeftReverse = 1;
 		public static final int solenoidRightForward = 2;
 		public static final int solenoidRightReverse = 3;
-		public static final int intakeLeft = 5;
-		public static final int intakeRight = 4;
+		public static final int intakeLeft = 1;
+		public static final int intakeRight = 0;
 		public static final double speedUp = -0.15;
 		public static final double speedDown = 0.75;
 	}
 	
 	public static class Conveyor {
-		public static final int conveyorLeft = 6;
-		public static final int conveyorRight = 7;
+		public static final int conveyorLeft = 7;
+		public static final int conveyorRight = 6;
 	}
 
 	public static class Autonomous {
@@ -93,9 +93,9 @@ public class RobotMap {
 
 	public static class Drive {
 		public static final int leftFront = 3;
-		public static final int leftBack = 2;
-		public static final int rightFront = 1;
-		public static final int rightBack = 0;
+		public static final int leftBack = 5;
+		public static final int rightFront = 2;
+		public static final int rightBack = 4;
 
 		public static class Slow {
 			public static final double normal = 1.0;
@@ -112,8 +112,8 @@ public class RobotMap {
 	}
 
 	public static class Climb {
-		public static final int climbLeft = 8;
-		public static final int climbRight = 9;
+		public static final int climbLeft = 9;
+		public static final int climbRight = 8;
 
 		public static final double maxForward = 0.65;
 		public static final double maxBackward = -0.4;
