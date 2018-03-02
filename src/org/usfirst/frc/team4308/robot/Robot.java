@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.auto.PathCenterLeft;
 import org.usfirst.frc.team4308.robot.auto.PathCenterRight;
+import org.usfirst.frc.team4308.robot.auto.PathForward;
 import org.usfirst.frc.team4308.robot.auto.PathLeftLeft;
 import org.usfirst.frc.team4308.robot.auto.PathLeftRight;
 import org.usfirst.frc.team4308.robot.auto.PathRightLeft;
@@ -107,7 +108,7 @@ public class Robot extends TimedRobot {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		if (autoChoice.equals("F")) {
-			
+			auto = new PathForward();
 		}
 		else if (autoChoice.equals("C")) {
 			if (gameData.charAt(0) == 'L') {
