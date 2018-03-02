@@ -13,7 +13,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4308.robot.auto.PathCenterLeft;
+import org.usfirst.frc.team4308.robot.auto.PathCenterRight;
+import org.usfirst.frc.team4308.robot.auto.PathLeftLeft;
+import org.usfirst.frc.team4308.robot.auto.PathLeftRight;
+import org.usfirst.frc.team4308.robot.auto.PathRightLeft;
+import org.usfirst.frc.team4308.robot.auto.PathRightRight;
 import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
@@ -95,25 +102,46 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
-		auto = new TestPath();
-		auto.start();
+		String autoChoice = SmartDashboard.getString("Auto Choice", "F");
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if (gameData.charAt(0) == 'L') {
-			// Left side is our alliance switch
-			
-		} else {
-			// Right side is our alliance switch
-
-		}
 		
-		if (gameData.charAt(2) == 'L') {
-			// Left side is our alliance switch
-		
-		} else {
-			// Right side is our alliance switch
+		if (autoChoice.equals("F")) {
 			
 		}
+		else if (autoChoice.equals("C")) {
+			if (gameData.charAt(0) == 'L') {
+				// Left side is our alliance switch
+				auto = new PathCenterLeft();
+			} else {
+				// Right side is our alliance switch
+				auto = new PathCenterRight();
+			}
+		}
+		else if (autoChoice.equals("L")) {
+			if (gameData.charAt(0) == 'L') {
+				// Left side is our alliance switch
+				auto = new PathLeftLeft();
+			} else {
+				// Right side is our alliance switch
+				auto = new PathLeftRight();
+			}
+		}
+		else if (autoChoice.equals("R")) {
+			if (gameData.charAt(0) == 'L') {
+				// Left side is our alliance switch
+				auto = new PathRightLeft();
+			} else {
+				// Right side is our alliance switch
+				auto = new PathRightRight();
+			}
+		}
+		
+		
+		if (auto != null) {
+			auto.start();
+		}
+		
 	}
 
 	/**
