@@ -6,6 +6,8 @@ public class PathLeftRight extends CommandGroup {
 	
 	public PathLeftRight() {
 		
+		
+		
 	}
 
 }
