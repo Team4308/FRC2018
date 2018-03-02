@@ -6,7 +6,8 @@ public class PathLeftRight extends CommandGroup {
 	
 	public PathLeftRight() {
 		
-		
+		addSequential(new Rotate(-30.0)); // Rotate 30 degrees
+		addSequential(new Move(115.0)); // Move 115" (overshoot 103.5")
 		
 	}
 
