@@ -5,14 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4308.robot.commands;
+package org.usfirst.frc.team4308.robot.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.SynchronousPID;
-import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -20,6 +19,9 @@ import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 public class Move extends Command {
 	private SynchronousPID pid;
 	private double movement;
+	
+	private double leftStartPos;
+	private double rightStartPos;
 	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
@@ -42,7 +44,8 @@ public class Move extends Command {
 		pid.reset();
 		pid.setSetpoint(movement);
 		
-		Robot.drive.resetSensors();
+		leftStartPos = Robot.drive.getLeftSensorPosition();
+		rightStartPos = Robot.drive.getRightSensorPosition();
 		
 	}
 
@@ -51,7 +54,10 @@ public class Move extends Command {
 	protected void execute() {
 		
 		// Currently average to prevent weird movement
-		double calculation = pid.calculate((Robot.drive.getLeftSensorPosition() + Robot.drive.getRightSensorPosition())/2);
+		double leftError = Robot.drive.getLeftSensorPosition() - leftStartPos;
+		double rightError = Robot.drive.getRightSensorPosition() - rightStartPos;
+		
+		double calculation = pid.calculate((leftError + rightError)/2);
 		
 		Robot.drive.setDrive(calculation, calculation);
 	}

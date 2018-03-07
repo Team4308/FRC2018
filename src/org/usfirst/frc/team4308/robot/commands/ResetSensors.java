@@ -10,9 +10,6 @@ package org.usfirst.frc.team4308.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4308.robot.Robot;
 
-/**
- * An example command.  You can replace me with your own command.
- */
 public class ResetSensors extends Command {
 	public ResetSensors() {
 		// Use requires() here to declare subsystem dependencies

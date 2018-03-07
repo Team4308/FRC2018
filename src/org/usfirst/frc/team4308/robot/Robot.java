@@ -13,13 +13,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4308.robot.commands.Auto;
+import org.usfirst.frc.team4308.robot.auto.TestPath;
+import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
+import org.usfirst.frc.team4308.robot.subsystems.Intake;
 import org.usfirst.frc.team4308.robot.subsystems.USBVision;
 
 /**
@@ -36,15 +37,16 @@ public class Robot extends TimedRobot {
 	public static USBVision usb;
 	public static Gyroscope navx;
 	public static PowerDistributionPanel pdp;
+	public static Intake intake;
+	public static Conveyor conveyor;
 
 	public static String gameData;
-
-	Command m_autonomousCommand;
-	SendableChooser<Command> autoChooser = new SendableChooser<>();
-
+	
+	private Command auto;
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
-	 * for any initialization code.
+	 * for any initialisation code.
 	 */
 	@Override
 	public void robotInit() {
@@ -53,14 +55,12 @@ public class Robot extends TimedRobot {
 		LiveWindow.disableAllTelemetry();
 		
 		drive = new DriveTrain();
-//		usb = new USBVision();		
+  		usb = new USBVision();		
 		navx = new Gyroscope();
 		oi = new OI();
+		intake = new Intake();
+		conveyor = new Conveyor();
 		
-//		autoChooser.addDefault("Default Auto", new ExampleCommand());
-//		autoChooser.addObject("Blind Auto", new BlindAuto());
-//		SmartDashboard.putData("Auto mode", autoChooser);
-
 	}
 
 	/**
@@ -70,7 +70,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		Command reset = new ResetSensors();
+		reset.start();
 	}
 
 	@Override
@@ -93,21 +94,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-//		m_autonomousCommand = autoChooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
 		
-		Auto auto = new Auto();
+		auto = new TestPath();
 		auto.start();
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -140,10 +128,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		// Stops auto when teleop starts
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		if (auto != null) {
+			auto.cancel();
 		}
-		
 		
 	}
 

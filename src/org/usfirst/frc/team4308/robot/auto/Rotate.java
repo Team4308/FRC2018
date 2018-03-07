@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4308.robot.commands;
+package org.usfirst.frc.team4308.robot.auto;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +19,8 @@ import org.usfirst.frc.team4308.robot.SynchronousPID;
 public class Rotate extends Command {
 	private SynchronousPID pid;
 	private double rotation;
+	
+	private double startRotation;
 	
 	public Rotate(double angle) {
 		pid = new SynchronousPID();
@@ -41,13 +43,16 @@ public class Rotate extends Command {
 		pid.reset();
 		pid.setSetpoint(rotation);
 		
-		Robot.navx.gyro.reset();
+		startRotation = Robot.navx.gyro.getAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double calculation = pid.calculate(Robot.navx.gyro.getAngle());
+		
+		double angleError = Robot.navx.gyro.getAngle() - startRotation;
+		
+		double calculation = pid.calculate(angleError);
 		
 		Robot.drive.setDrive(calculation, -calculation);
 	}

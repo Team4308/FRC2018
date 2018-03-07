@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4308.robot;
 
-import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -29,12 +29,14 @@ public class Logger {
 		SmartDashboard.putNumber("GyroDisplacement Y", Robot.navx.gyro.getDisplacementY());
 		SmartDashboard.putNumber("GyroDisplacement Z", Robot.navx.gyro.getDisplacementZ());
 
-		SmartDashboard.putNumber("FrontLeftMotorCurrent", DriveTrain.frontLeft.getOutputCurrent());
-		SmartDashboard.putNumber("FrontRightMotorCurrent", DriveTrain.frontRight.getOutputCurrent());
-		SmartDashboard.putNumber("RearLeftMotorCurrent", DriveTrain.rearLeft.getOutputCurrent());
-		SmartDashboard.putNumber("RearRightMotorCurrent", DriveTrain.rearRight.getOutputCurrent());
+		SmartDashboard.putNumber("FrontLeftMotorCurrent", Robot.drive.frontLeft.getOutputCurrent());
+		SmartDashboard.putNumber("FrontRightMotorCurrent", Robot.drive.frontRight.getOutputCurrent());
+		SmartDashboard.putNumber("RearLeftMotorCurrent", Robot.drive.rearLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
 		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
+		
+		SmartDashboard.putNumber("IntakeState", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
 		
 	}
 	
