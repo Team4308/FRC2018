@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
 		LiveWindow.disableAllTelemetry();
 		
 		drive = new DriveTrain();
-//		usb = new USBVision();		
+  		usb = new USBVision();		
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
