@@ -13,6 +13,9 @@ public class Logger {
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
+		SmartDashboard.putNumber("Time",Robot.timer.get());
+		
+		//SmartDashboard.putNumber(key, );
 		
 		SmartDashboard.putNumber("LeftX", leftX);
 		SmartDashboard.putNumber("LeftY", leftY);
