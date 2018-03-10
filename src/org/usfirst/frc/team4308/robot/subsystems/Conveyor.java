@@ -18,6 +18,10 @@ public class Conveyor extends Subsystem {
 		conveyorRight.setInverted(true);
 	}
 
+	public enum conveyorState {
+		ON,DOWN,UP;
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		

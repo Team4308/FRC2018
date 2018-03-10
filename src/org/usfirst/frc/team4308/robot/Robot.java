@@ -44,11 +44,10 @@ public class Robot extends TimedRobot {
 
 	public static String gameData;
 	
-	private Command auto;
-	
+	private Command auto;	
 	/**
 	 * This function is run when the robot is first started up and should be used
-	 * for any initialisation code.
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -57,11 +56,12 @@ public class Robot extends TimedRobot {
 		LiveWindow.disableAllTelemetry();
 		
 		drive = new DriveTrain();
-  		usb = new USBVision();		
+		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
+		timer = new Timer();
 		
 	}
 

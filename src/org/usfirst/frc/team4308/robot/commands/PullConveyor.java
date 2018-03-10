@@ -17,9 +17,9 @@ public class PullConveyor extends Command {
 		super.execute();
 		
 		if (!reversed)
-			Robot.conveyor.moveConveyor(1.0);
+			Robot.conveyor.moveConveyor(0.5);
 		else
-			Robot.conveyor.moveConveyor(-1.0);
+			Robot.conveyor.moveConveyor(0.5);
 	}
 	
 	@Override
@@ -35,5 +35,6 @@ public class PullConveyor extends Command {
 	protected void interrupted() {
 		Robot.conveyor.stopConveyor();
 	}
+	
 
 }

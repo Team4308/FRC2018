@@ -37,7 +37,15 @@ public class Logger {
 		SmartDashboard.putNumber("RearLeftMotorCurrent", Robot.drive.rearLeft.getOutputCurrent());
 		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
 		
+		SmartDashboard.putNumber("LeftConveyorCurrent", Robot.conveyor.conveyorLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightConveyorCurrent", Robot.conveyor.conveyorRight.getOutputCurrent());
+		
+		SmartDashboard.putNumber("IntakeMotorLeft", Robot.intake.intakeLeft.getOutputCurrent());
+		SmartDashboard.putNumber("IntakeMotorRight", Robot.intake.intakeRight.getOutputCurrent());
+		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
+		
+		//SmartDashboard.putNumber("Conveyor Direction",);
 		
 		SmartDashboard.putNumber("IntakeState", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
 		
