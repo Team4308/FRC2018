@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4308.robot;
 
+import org.usfirst.frc.team4308.robot.subsystems.Conveyor.ConveyorState;
 import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,9 +46,9 @@ public class Logger {
 		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
-		//SmartDashboard.putNumber("Conveyor Direction",);
+		SmartDashboard.putString("Conveyor Direction", Robot.conveyor.conveyorState == ConveyorState.OFF ? "OFF" : Robot.conveyor.conveyorState == ConveyorState.UP ? "UP" : "DOWN");
 		
-		SmartDashboard.putNumber("IntakeState", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
+		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
 		
 	}
 	

@@ -22,6 +22,7 @@ public class ResetSensors extends Command {
 	protected void initialize() {
 		Robot.drive.resetSensors();
 		Robot.navx.gyro.reset();
+		Robot.timer.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
