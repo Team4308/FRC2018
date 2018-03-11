@@ -75,8 +75,8 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		conveyor = new Conveyor();
 		
-		autoChooser.addDefault("Do Nothing" , null);
-		autoChooser.addObject("Left", new LeftAuto());
+
+		autoChooser.addDefault("Left", new LeftAuto());
 		autoChooser.addObject("Right", new RightAuto());
 		autoChooser.addObject("Center", new CenterAuto());
 		SmartDashboard.putData("Where are you?", autoChooser);
