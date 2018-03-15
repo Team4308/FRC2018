@@ -53,6 +53,10 @@ public class OI {
 		A1.whenPressed(new SwitchCompressor());
 //		B1.whileHeld(new PullConveyor(true));
 //		X1.whileHeld(new PullConveyor(false));
+		
+		X1.whenPressed(new Rotate(90));
+		Y1.whenPressed(new Move(60));
+		
 //
 //		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 //		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));

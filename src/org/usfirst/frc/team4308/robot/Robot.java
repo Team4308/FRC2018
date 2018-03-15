@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.auto.CenterAuto;
 import org.usfirst.frc.team4308.robot.auto.LeftAuto;
+import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.RightAuto;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
 		auto = null;
 		autoChooser = new SendableChooser<String>();
 		
+		autoChooser.addObject("Baseline", "BaselineAuto");
 		autoChooser.addObject("Left", "LeftAuto");
 		autoChooser.addObject("Right", "RightAuto");
 		autoChooser.addObject("Center", "CenterAuto");
@@ -125,6 +127,8 @@ public class Robot extends TimedRobot {
 			auto = new RightAuto();
 		} else if (key.equals("CenterAuto")){
 			auto = new CenterAuto();
+		} else if (key.equals("BaselineAuto")) {
+			auto = new Move(100.0);
 		}
     
 		if (auto != null) {
