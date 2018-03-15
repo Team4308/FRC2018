@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4308.robot.subsystems;
+	package org.usfirst.frc.team4308.robot.subsystems;
 
 import java.util.ArrayList;
 
@@ -71,19 +71,7 @@ public class DriveTrain extends Subsystem {
 		
 		Robot.pdp.clearStickyFaults();
 		
-		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
-		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
-		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
-		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
-		
-		// Tank Drive
-//		setDrive(leftY, rightY); 
-		
-		// Arcade Drive - Left Stick
-//		setDrive(leftY + leftX, leftY - leftX);
-		
-		// Arcade Drive - Left: Drive, Right: Steer
-		setDrive(leftY + rightX, leftY - rightX);
+		setDrive(OI.getDriveSchemeLeft(), OI.getDriveSchemeRight());
 		
 	}
 	
