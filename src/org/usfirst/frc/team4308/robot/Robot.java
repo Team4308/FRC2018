@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4308.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
 	public static Intake intake;
 	public static Conveyor conveyor;
 	public static Timer timer;
+	public static Compressor c;
 
 	public static String gameData = "";
 	
@@ -61,7 +63,7 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
-
+		c = new Compressor(0);
 		drive = new DriveTrain();	
 		usb = new USBVision();
 		navx = new Gyroscope();

@@ -8,6 +8,8 @@
 package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.commands.RotateCube;
+import org.usfirst.frc.team4308.robot.commands.SwitchCompressor;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
@@ -49,12 +51,15 @@ public class OI {
 	public OI() {
 		
 		// Single controller controls
-//		A1.whenPressed(new IntakeToggle(ToggleType.SWITCH));
+		A1.whenPressed(new SwitchCompressor());
 //		B1.whileHeld(new PullConveyor(true));
 //		X1.whileHeld(new PullConveyor(false));
 //
 //		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 //		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
+		
+		//A2.whenPressed(new IntakeToggle(ToggleType.SWITCH));
+		B2.whileHeld(new RotateCube());
 		
 		// Dual controller controls
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
@@ -79,7 +84,7 @@ public class OI {
 		
 //		double leftX = driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 		double leftY = -driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
-		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX) * 0.7;
+		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX) * 0.5;
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		return (leftY + rightX);
@@ -90,7 +95,7 @@ public class OI {
 		
 //		double leftX = driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 		double leftY = -driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
-		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX) * 0.7;
+		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX) * 0.5;
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		return (leftY - rightX);
