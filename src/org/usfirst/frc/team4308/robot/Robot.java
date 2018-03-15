@@ -10,6 +10,7 @@ package org.usfirst.frc.team4308.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -52,15 +53,17 @@ public class Robot extends TimedRobot {
 	public static PowerDistributionPanel pdp;
 	public static Intake intake;
 	public static Conveyor conveyor;
+	public static Timer timer;
 
 	public static String gameData;
 	
+
 	public static SendableChooser<CommandGroup> autoChooser;
 	public static Command auto;
-	
+
 	/**
 	 * This function is run when the robot is first started up and should be used
-	 * for any initialisation code.
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -68,12 +71,14 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
+
 		drive = new DriveTrain();	
-		usb = new USBVision();		
+		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
+		timer = new Timer();
 		
 		autoChooser.addDefault("Do Nothing" , null);
 		autoChooser.addObject("Left", new LeftAuto());
@@ -139,6 +144,7 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
+		timer.start();
 		
 	}
 
