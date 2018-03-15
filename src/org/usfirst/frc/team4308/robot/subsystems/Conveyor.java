@@ -16,7 +16,8 @@ public class Conveyor extends Subsystem {
 	public WPI_TalonSRX conveyorLeft;
 	public WPI_TalonSRX conveyorRight;
 	
-	public static ConveyorState conveyorState = ConveyorState.OFF;
+	public ConveyorState conveyorState = ConveyorState.OFF;
+	
 	public Conveyor() {
 		conveyorLeft = new WPI_TalonSRX(RobotMap.Conveyor.conveyorLeft);
 		conveyorRight = new WPI_TalonSRX(RobotMap.Conveyor.conveyorRight);

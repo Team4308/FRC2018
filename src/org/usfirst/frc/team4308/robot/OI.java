@@ -8,7 +8,6 @@
 package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
-import org.usfirst.frc.team4308.robot.commands.RotateCube;
 import org.usfirst.frc.team4308.robot.commands.SwitchCompressor;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
@@ -58,10 +57,11 @@ public class OI {
 //		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 //		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
-		//A2.whenPressed(new IntakeToggle(ToggleType.SWITCH));
-		B2.whileHeld(new RotateCube());
+//		A2.whenPressed(new IntakeToggle(ToggleType.SWITCH));
 		
 		// Dual controller controls
+		B2.whenPressed(new IntakeToggle(ToggleType.OFF));
+		
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
@@ -113,14 +113,29 @@ public class OI {
 		
 	}
 	
-	public static double getIntakeScheme() {
+	public static double getIntakeSchemeLeft() {
 
 //		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
 //		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-		return rightY;
+		double leftTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
+		
+		return rightY + leftTrigger;
+		
+	}
+	
+	public static double getIntakeSchemeRight() {
+
+//		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
+//		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
+//		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		
+		double rightTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
+		
+		return rightY + rightTrigger;
 		
 	}
 	
