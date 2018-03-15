@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
 	
-	public static WPI_TalonSRX intakeLeft, intakeRight;
+	public WPI_TalonSRX intakeLeft, intakeRight;
 	
 	public enum IntakeState {
 		OPEN, CLOSE, OFF
@@ -20,8 +20,8 @@ public class Intake extends Subsystem {
 	
 	public IntakeState state = IntakeState.CLOSE;
 	
-	public static DoubleSolenoid solenoidLeft;
-	public static DoubleSolenoid solenoidRight;
+	public DoubleSolenoid solenoidLeft;
+	public DoubleSolenoid solenoidRight;
 	
 	public Intake() {
 //		c = new Compressor();
@@ -69,8 +69,15 @@ public class Intake extends Subsystem {
 		
 		Robot.pdp.clearStickyFaults();
 		
-		intakeLeft.set(OI.getIntakeScheme());
-		intakeRight.set(OI.getIntakeScheme());
+		moveIntake(OI.getIntakeSchemeLeft(), OI.getIntakeSchemeRight());
+		
+	}
+	
+	public void moveIntake(double left, double right) {
+
+		intakeLeft.set(left);
+		intakeRight.set(right);
+		
 	}
 	
 	

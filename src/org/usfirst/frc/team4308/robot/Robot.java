@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
 
 	public static String gameData = "";
 	
-	public static SendableChooser autoChooser;
+	public static SendableChooser<String> autoChooser;
 	public static Command auto;
 
 	/**
@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
 		System.out.println(gameData.charAt(0));
 		
 		auto = null;
-		autoChooser = new SendableChooser();
+		autoChooser = new SendableChooser<String>();
 		
 		autoChooser.addObject("Left", "LeftAuto");
 		autoChooser.addObject("Right", "RightAuto");

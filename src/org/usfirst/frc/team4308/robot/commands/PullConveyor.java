@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4308.robot.commands;
 
 import org.usfirst.frc.team4308.robot.Robot;
-import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor.ConveyorState;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,12 +34,12 @@ public class PullConveyor extends Command {
 
 	protected void end() {
 		Robot.conveyor.stopConveyor();
-		Conveyor.conveyorState = ConveyorState.OFF;
+		Robot.conveyor.conveyorState = ConveyorState.OFF;
 	}
 
 	protected void interrupted() {
 		Robot.conveyor.stopConveyor();
-		Conveyor.conveyorState = ConveyorState.OFF;
+		Robot.conveyor.conveyorState = ConveyorState.OFF;
 	}
 
 }
