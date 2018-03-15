@@ -66,12 +66,12 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		conveyor = new Conveyor();
 		
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		auto = null;
 		autoChooser = new SendableChooser();
 		
-		autoChooser.addObject("Left", new LeftAuto());
-		autoChooser.addObject("Right", new RightAuto());
-		autoChooser.addObject("Center", new CenterAuto());
+		autoChooser.addObject("Left", "LeftAuto");
+		autoChooser.addObject("Right", "RightAuto");
+		autoChooser.addObject("Center", "CenterAuto");
 		SmartDashboard.putData("Where are you?", autoChooser);
 		
 	}
@@ -107,8 +107,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		String key = (String) autoChooser.getSelected();
+		if(key.equals("LeftAuto")) {
+			auto = new LeftAuto();
+		} else if (key.equals("RightAuto")) {
+			auto = new RightAuto();
+		} else if (key.equals("CenterAuto")){
+			auto = new CenterAuto();
+		}
 		
-		auto = (Command) autoChooser.getSelected();
 		if (auto != null) {
 			auto.start();
 		}
