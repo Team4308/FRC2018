@@ -69,6 +69,12 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		conveyor = new Conveyor();
 		timer = new Timer();
+
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		System.out.println(gameData.charAt(0));
+	
+		autoChooser = new SendableChooser<CommandGroup>();
 		
 		auto = null;
 		autoChooser = new SendableChooser();
@@ -111,7 +117,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		String key = (String) autoChooser.getSelected();
 		if(key.equals("LeftAuto")) {
@@ -121,7 +126,7 @@ public class Robot extends TimedRobot {
 		} else if (key.equals("CenterAuto")){
 			auto = new CenterAuto();
 		}
-		
+    
 		if (auto != null) {
 			auto.start();
 		}

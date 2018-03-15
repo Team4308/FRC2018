@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
 import org.usfirst.frc.team4308.robot.OI;
+import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteIntake;
 
@@ -66,13 +67,10 @@ public class Intake extends Subsystem {
 	
 	public void intakeControl() {
 		
-		double leftTrigger  = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
-		double rightTrigger = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
+		Robot.pdp.clearStickyFaults();
 		
-		double diff = leftTrigger - rightTrigger;
-		
-		intakeLeft.set(diff);
-		intakeRight.set(diff);
+		intakeLeft.set(OI.getIntakeScheme());
+		intakeRight.set(OI.getIntakeScheme());
 	}
 	
 	
