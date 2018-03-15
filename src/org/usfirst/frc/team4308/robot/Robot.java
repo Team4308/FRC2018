@@ -73,8 +73,6 @@ public class Robot extends TimedRobot {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		System.out.println(gameData.charAt(0));
-	
-		autoChooser = new SendableChooser<CommandGroup>();
 		
 		auto = null;
 		autoChooser = new SendableChooser();
