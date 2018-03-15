@@ -6,8 +6,7 @@ import org.usfirst.frc.team4308.robot.commands.PullConveyor;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CenterAuto extends CommandGroup {
-	
-	public CenterAuto() {
+	public CenterAuto(){
 		if (Robot.gameData.charAt(0) == 'L') {
 			// Left side is our alliance switch
 			addSequential(new Move(20.0)); // Move 20" forward
@@ -25,5 +24,5 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Move(32.0)); // Move 32" forward (overshooting 29.25")
 			addSequential(new PullConveyor(false), 2.5);
 		}
-	}
+}
 }

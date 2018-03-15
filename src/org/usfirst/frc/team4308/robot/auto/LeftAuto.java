@@ -6,7 +6,7 @@ import org.usfirst.frc.team4308.robot.commands.PullConveyor;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LeftAuto extends CommandGroup {
-	
+
 	public LeftAuto() {
 		if (Robot.gameData.charAt(0) == 'L') {
 			// Alliance Switch is on the left; attempt to score cube!

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -20,15 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.auto.CenterAuto;
 import org.usfirst.frc.team4308.robot.auto.LeftAuto;
-import org.usfirst.frc.team4308.robot.auto.PathCenterLeft;
-import org.usfirst.frc.team4308.robot.auto.PathCenterRight;
-import org.usfirst.frc.team4308.robot.auto.PathForward;
-import org.usfirst.frc.team4308.robot.auto.PathLeftLeft;
-import org.usfirst.frc.team4308.robot.auto.PathLeftRight;
-import org.usfirst.frc.team4308.robot.auto.PathRightLeft;
-import org.usfirst.frc.team4308.robot.auto.PathRightRight;
 import org.usfirst.frc.team4308.robot.auto.RightAuto;
-import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
@@ -55,10 +46,9 @@ public class Robot extends TimedRobot {
 	public static Conveyor conveyor;
 	public static Timer timer;
 
-	public static String gameData;
+	public static String gameData = "";
 	
-
-	public static SendableChooser<CommandGroup> autoChooser;
+	public static SendableChooser autoChooser;
 	public static Command auto;
 
 	/**
@@ -86,10 +76,12 @@ public class Robot extends TimedRobot {
 	
 		autoChooser = new SendableChooser<CommandGroup>();
 		
-		autoChooser.addDefault("Do Nothing" , null);
-		autoChooser.addObject("Left", new LeftAuto());
-		autoChooser.addObject("Right", new RightAuto());
-		autoChooser.addObject("Center", new CenterAuto());
+		auto = null;
+		autoChooser = new SendableChooser();
+		
+		autoChooser.addObject("Left", "LeftAuto");
+		autoChooser.addObject("Right", "RightAuto");
+		autoChooser.addObject("Center", "CenterAuto");
 		SmartDashboard.putData("Where are you?", autoChooser);
 		
 	}
@@ -125,8 +117,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
-		auto = (Command) autoChooser.getSelected();
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		String key = (String) autoChooser.getSelected();
+		if(key.equals("LeftAuto")) {
+			auto = new LeftAuto();
+		} else if (key.equals("RightAuto")) {
+			auto = new RightAuto();
+		} else if (key.equals("CenterAuto")){
+			auto = new CenterAuto();
+		}
+    
 		if (auto != null) {
 			auto.start();
 		}
