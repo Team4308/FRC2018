@@ -12,9 +12,22 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4308.robot.auto.CenterAuto;
+import org.usfirst.frc.team4308.robot.auto.LeftAuto;
+import org.usfirst.frc.team4308.robot.auto.PathCenterLeft;
+import org.usfirst.frc.team4308.robot.auto.PathCenterRight;
+import org.usfirst.frc.team4308.robot.auto.PathForward;
+import org.usfirst.frc.team4308.robot.auto.PathLeftLeft;
+import org.usfirst.frc.team4308.robot.auto.PathLeftRight;
+import org.usfirst.frc.team4308.robot.auto.PathRightLeft;
+import org.usfirst.frc.team4308.robot.auto.PathRightRight;
+import org.usfirst.frc.team4308.robot.auto.RightAuto;
 import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
@@ -44,7 +57,10 @@ public class Robot extends TimedRobot {
 
 	public static String gameData;
 	
-	private Command auto;	
+
+	public static SendableChooser<CommandGroup> autoChooser;
+	public static Command auto;
+
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -55,13 +71,20 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
-		drive = new DriveTrain();
+
+		drive = new DriveTrain();	
 		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
 		timer = new Timer();
+		
+		autoChooser.addDefault("Do Nothing" , null);
+		autoChooser.addObject("Left", new LeftAuto());
+		autoChooser.addObject("Right", new RightAuto());
+		autoChooser.addObject("Center", new CenterAuto());
+		SmartDashboard.putData("Where are you?", autoChooser);
 		
 	}
 
@@ -96,26 +119,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
-		auto = new TestPath();
-		auto.start();
-		
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if (gameData.charAt(0) == 'L') {
-			// Left side is our alliance switch
-			
-		} else {
-			// Right side is our alliance switch
 
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		auto = autoChooser.getSelected();
+		if (auto != null) {
+			auto.start();
 		}
 		
-		if (gameData.charAt(2) == 'L') {
-			// Left side is our alliance switch
-		
-		} else {
-			// Right side is our alliance switch
-			
-		}
 	}
 
 	/**
