@@ -37,7 +37,7 @@ public class Rotate extends Command {
 	protected void initialize() {
 		double Kp = SmartDashboard.getNumber("RotateP", 0.02); 
 		double Ki = SmartDashboard.getNumber("RotateI", 0.0);
-		double Kd = SmartDashboard.getNumber("RotateD", 0.2);
+		double Kd = SmartDashboard.getNumber("RotateD", 0.33);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();

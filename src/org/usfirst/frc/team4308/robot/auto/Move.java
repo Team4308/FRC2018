@@ -38,7 +38,7 @@ public class Move extends Command {
 	protected void initialize() {
 		double Kp = SmartDashboard.getNumber("MoveP", 0.02); 
 		double Ki = SmartDashboard.getNumber("MoveI", 0.0);
-		double Kd = SmartDashboard.getNumber("MoveD", 0.2);
+		double Kd = SmartDashboard.getNumber("MoveD", 0.3);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
