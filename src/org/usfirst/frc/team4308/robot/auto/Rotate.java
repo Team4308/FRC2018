@@ -24,7 +24,7 @@ public class Rotate extends Command {
 	
 	public Rotate(double angle) {
 		pid = new SynchronousPID();
-		pid.setOutputRange(-0.5, 0.5);
+		pid.setOutputRange(-0.6, 0.6);
 		
 	    	rotation = angle;
 	    	

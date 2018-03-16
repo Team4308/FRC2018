@@ -16,8 +16,6 @@ public class Conveyor extends Subsystem {
 	public WPI_TalonSRX conveyorLeft;
 	public WPI_TalonSRX conveyorRight;
 	
-	public ConveyorState conveyorState = ConveyorState.OFF;
-	
 	public Conveyor() {
 		conveyorLeft = new WPI_TalonSRX(RobotMap.Conveyor.conveyorLeft);
 		conveyorRight = new WPI_TalonSRX(RobotMap.Conveyor.conveyorRight);
@@ -31,10 +29,6 @@ public class Conveyor extends Subsystem {
 		}
 
 		conveyorRight.setInverted(true);
-	}
-
-	public enum ConveyorState {
-		OFF,DOWN,UP;
 	}
 	
 	@Override

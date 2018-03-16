@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4308.robot.commands;
 
 import org.usfirst.frc.team4308.robot.Robot;
-import org.usfirst.frc.team4308.robot.subsystems.Conveyor.ConveyorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,10 +18,8 @@ public class PullConveyor extends Command {
 
 		if (!reversed) {
 			Robot.conveyor.moveConveyor(1);
-			Robot.conveyor.conveyorState = ConveyorState.DOWN;
 		} else {
 			Robot.conveyor.moveConveyor(-1);
-			Robot.conveyor.conveyorState = ConveyorState.UP;
 		}
 	}
 
@@ -34,12 +31,10 @@ public class PullConveyor extends Command {
 
 	protected void end() {
 		Robot.conveyor.stopConveyor();
-		Robot.conveyor.conveyorState = ConveyorState.OFF;
 	}
 
 	protected void interrupted() {
 		Robot.conveyor.stopConveyor();
-		Robot.conveyor.conveyorState = ConveyorState.OFF;
 	}
 
 }

@@ -25,7 +25,7 @@ public class Move extends Command {
 	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
-		pid.setOutputRange(-0.5, 0.5);
+		pid.setOutputRange(-0.8, 0.8);
 		
 	    	movement = displacement;
 	    	

@@ -126,7 +126,7 @@ public class OI {
 		
 		double leftTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
 		
-		return rightY + leftTrigger;
+		return rightY - leftTrigger;
 		
 	}
 	
@@ -139,7 +139,7 @@ public class OI {
 		
 		double rightTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
 		
-		return rightY + rightTrigger;
+		return rightY - rightTrigger;
 		
 	}
 	

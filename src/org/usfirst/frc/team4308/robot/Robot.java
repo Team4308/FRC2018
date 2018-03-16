@@ -72,19 +72,27 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		conveyor = new Conveyor();
 		timer = new Timer();
-
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		System.out.println(gameData.charAt(0));
 		
 		auto = null;
 		autoChooser = new SendableChooser<String>();
 		
-		autoChooser.addObject("Baseline", "BaselineAuto");
+		/*autoChooser.addObject("Baseline", "BaselineAuto");
 		autoChooser.addObject("Left", "LeftAuto");
 		autoChooser.addObject("Right", "RightAuto");
 		autoChooser.addObject("Center", "CenterAuto");
-		SmartDashboard.putData("Where are you?", autoChooser);
+		SmartDashboard.putData("StartingPosition", autoChooser);*/
+		
+		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
+		
+
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.02)); 
+		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.2));
+
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.02)); 
+		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
+		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.2));
+		
 		
 	}
 
@@ -119,15 +127,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		String key = (String) autoChooser.getSelected();
-		if(key.equals("LeftAuto")) {
+		while (gameData.equals("")) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+		}
+		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
+		if(key.equals("L")) {
 			auto = new LeftAuto();
-		} else if (key.equals("RightAuto")) {
+		} else if (key.equals("R")) {
 			auto = new RightAuto();
-		} else if (key.equals("CenterAuto")){
+		} else if (key.equals("C")){
 			auto = new CenterAuto();
-		} else if (key.equals("BaselineAuto")) {
+		} else if (key.equals("B")) {
 			auto = new Move(100.0);
 		}
     

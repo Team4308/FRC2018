@@ -10,7 +10,7 @@ public class RightAuto extends CommandGroup {
 	public RightAuto(){
 		if (Robot.gameData.charAt(0) == ('L')) {
 			//Alliance Switch is on the left side; ignore and cross baseline
-			addSequential(new Move(148.0)); // Move 100"
+			addSequential(new Move(148.0)); // Move 148"
 		} else {
 			//Alliance Switch is on the right side; go for switch
 			addSequential(new Move(148.0)); // Move 148"
