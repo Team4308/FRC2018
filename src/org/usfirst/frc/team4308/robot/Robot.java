@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
-		c = new Compressor(0);
+		c = new Compressor(1);
 		drive = new DriveTrain();	
 		usb = new USBVision();
 		navx = new Gyroscope();
@@ -85,13 +85,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
 		
 
-		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.02)); 
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.2));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.28));
 
-		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.02)); 
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.022)); 
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
-		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.2));
+		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
 		
 		
 	}
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 		} else if (key.equals("C")){
 			auto = new CenterAuto();
 		} else if (key.equals("B")) {
-			auto = new Move(100.0);
+			auto = new Move(-148.0);
 		}
     
 		if (auto != null) {
