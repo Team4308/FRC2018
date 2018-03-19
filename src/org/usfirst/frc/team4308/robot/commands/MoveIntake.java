@@ -4,23 +4,21 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PullConveyor extends Command {
+public class MoveIntake extends Command {
+	
+	private double left;
+	private double right;
 
-	private boolean reversed;
-
-	public PullConveyor(boolean reverse) {
-		reversed = reverse;
+	public MoveIntake(double left, double right) {
+		this.left = left;
+		this.right = right;
 	}
 
 	@Override
 	protected void execute() {
 		super.execute();
 
-		if (!reversed) {
-			Robot.conveyor.moveConveyor(1);
-		} else {
-			Robot.conveyor.moveConveyor(-1);
-		}
+		Robot.intake.moveIntake(left, right);
 	}
 
 	@Override
@@ -30,11 +28,12 @@ public class PullConveyor extends Command {
 	}
 
 	protected void end() {
-		Robot.conveyor.stopConveyor();
+		Robot.intake.stopIntake();
 	}
 
 	protected void interrupted() {
-		Robot.conveyor.stopConveyor();
+		Robot.intake.stopIntake();
 	}
+
 
 }

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4308.robot;
 
-import org.usfirst.frc.team4308.robot.subsystems.Conveyor.ConveyorState;
 import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,14 +40,14 @@ public class Logger {
 		SmartDashboard.putNumber("LeftConveyorCurrent", Robot.conveyor.conveyorLeft.getOutputCurrent());
 		SmartDashboard.putNumber("RightConveyorCurrent", Robot.conveyor.conveyorRight.getOutputCurrent());
 		
-		SmartDashboard.putNumber("IntakeMotorLeft", Robot.intake.intakeLeft.getOutputCurrent());
-		SmartDashboard.putNumber("IntakeMotorRight", Robot.intake.intakeRight.getOutputCurrent());
+		SmartDashboard.putNumber("LeftIntakeCurrent", Robot.intake.intakeLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightIntakeCurrent", Robot.intake.intakeRight.getOutputCurrent());
 		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
-		SmartDashboard.putString("Conveyor Direction", Robot.conveyor.conveyorState == ConveyorState.OFF ? "OFF" : Robot.conveyor.conveyorState == ConveyorState.UP ? "UP" : "DOWN");
-		
 		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
+		
+		SmartDashboard.getString("Position (B, L,R,C): ", "");
 		
 	}
 	
