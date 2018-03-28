@@ -4,14 +4,14 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AbsoluteIntake extends Command {
+public class AbsoluteFlags extends Command {
 
-	public AbsoluteIntake() {
-		requires(Robot.intake);
+	public AbsoluteFlags() {
+		requires(Robot.flags);
 	}
 	
 	protected void execute() {
-		Robot.intake.intakeControl();
+		
 	}
 
 	protected boolean isFinished() {
@@ -19,12 +19,10 @@ public class AbsoluteIntake extends Command {
 	}
 	
 	protected void end() {
-    		Robot.intake.stopIntake();
-    		Robot.intake.closeIntake();
+    		Robot.flags.retreatFlags();
     }
 	
 	protected void interrupted() {
-		Robot.intake.stopIntake();
-		Robot.intake.closeIntake();
+		Robot.flags.retreatFlags();
 	}
 }
