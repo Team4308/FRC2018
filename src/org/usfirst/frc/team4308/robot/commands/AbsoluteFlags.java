@@ -19,10 +19,10 @@ public class AbsoluteFlags extends Command {
 	}
 	
 	protected void end() {
-    		Robot.flags.retreatFlags();
+    		Robot.flags.stopFlags();
     }
 	
 	protected void interrupted() {
-		Robot.flags.retreatFlags();
+		Robot.flags.stopFlags();
 	}
 }

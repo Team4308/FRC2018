@@ -6,16 +6,22 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class SetFlag extends Command {
 	
-	private FlagType setFlag;
 	private int channel;
+	private boolean set;
+	private boolean useTimeout = true;
 	
-	public enum FlagType {
-		UP, DOWN, SWITCH, STOP
-	}
-	
-	public SetFlag(FlagType set, int channel) {
-		setFlag = set;
+	public SetFlag(int channel, boolean up, double timeout) {
+		this.set = up;
 		this.channel = channel;
+		
+		if (timeout < 0) {
+			useTimeout = false;
+		}
+		else {
+			useTimeout = true;
+			setTimeout(timeout);
+		}
+		
 	}
 	
 	@Override
@@ -23,17 +29,11 @@ public class SetFlag extends Command {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		if (setFlag == FlagType.SWITCH) {
-			Robot.flags.switchFlag(channel);
-		}
-		else if (setFlag == FlagType.UP) {
+		if (set) {
 			Robot.flags.raiseFlag(channel);
 		}
-		else if (setFlag == FlagType.DOWN) {
-			Robot.flags.dropFlag(channel);
-		}
 		else {
-			Robot.flags.stopFlag(channel);
+			Robot.flags.dropFlag(channel);
 		}
 		
 	}
@@ -41,7 +41,16 @@ public class SetFlag extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return true;
+		return useTimeout && isTimedOut();
+	}
+	
+
+	protected void end() {
+    		Robot.flags.stopFlags();
+    }
+	
+	protected void interrupted() {
+		Robot.flags.stopFlags();
 	}
 
 }
