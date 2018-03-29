@@ -12,15 +12,21 @@ public class Flags extends Subsystem {
 	private double up = 0.5;
 	private double down = -0.5;
 	
+	
 	public Flags() {
 		talons = new Talon[1];
 		talons[0] = new Talon(0);
 //		talons[1] = new Talon(1);
+	
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new AbsoluteFlags());
+	}
+	
+	public void flagControl() {
+
 	}
 	
 	public void stopFlags() {

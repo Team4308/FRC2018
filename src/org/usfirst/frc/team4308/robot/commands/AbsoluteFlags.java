@@ -11,7 +11,7 @@ public class AbsoluteFlags extends Command {
 	}
 	
 	protected void execute() {
-		
+		Robot.flags.flagControl();
 	}
 
 	protected boolean isFinished() {
