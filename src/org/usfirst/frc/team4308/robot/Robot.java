@@ -7,11 +7,12 @@
 
 package org.usfirst.frc.team4308.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,15 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.auto.CenterAuto;
 import org.usfirst.frc.team4308.robot.auto.LeftAuto;
-import org.usfirst.frc.team4308.robot.auto.PathCenterLeft;
-import org.usfirst.frc.team4308.robot.auto.PathCenterRight;
-import org.usfirst.frc.team4308.robot.auto.PathForward;
-import org.usfirst.frc.team4308.robot.auto.PathLeftLeft;
-import org.usfirst.frc.team4308.robot.auto.PathLeftRight;
-import org.usfirst.frc.team4308.robot.auto.PathRightLeft;
-import org.usfirst.frc.team4308.robot.auto.PathRightRight;
+import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.RightAuto;
-import org.usfirst.frc.team4308.robot.auto.TestPath;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
@@ -52,15 +46,17 @@ public class Robot extends TimedRobot {
 	public static PowerDistributionPanel pdp;
 	public static Intake intake;
 	public static Conveyor conveyor;
+	public static Timer timer;
+	public static Compressor c;
 
-	public static String gameData;
+	public static String gameData = "";
 	
-	public static SendableChooser<CommandGroup> autoChooser;
+	public static SendableChooser<String> autoChooser;
 	public static Command auto;
-	
+
 	/**
 	 * This function is run when the robot is first started up and should be used
-	 * for any initialisation code.
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -68,18 +64,35 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
+		c = new Compressor(1);
 		drive = new DriveTrain();	
-		usb = new USBVision();		
+		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
+		timer = new Timer();
 		
-		autoChooser.addDefault("Do Nothing" , null);
-		autoChooser.addObject("Left", new LeftAuto());
-		autoChooser.addObject("Right", new RightAuto());
-		autoChooser.addObject("Center", new CenterAuto());
-		SmartDashboard.putData("Where are you?", autoChooser);
+		auto = null;
+		autoChooser = new SendableChooser<String>();
+		
+		/*autoChooser.addObject("Baseline", "BaselineAuto");
+		autoChooser.addObject("Left", "LeftAuto");
+		autoChooser.addObject("Right", "RightAuto");
+		autoChooser.addObject("Center", "CenterAuto");
+		SmartDashboard.putData("StartingPosition", autoChooser);*/
+		
+		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
+		
+
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
+		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.28));
+
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.022)); 
+		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
+		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
+		
 		
 	}
 
@@ -114,10 +127,20 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		auto = autoChooser.getSelected();
+		while (gameData.equals("")) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+		}
+		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
+		if(key.equals("L")) {
+			auto = new LeftAuto();
+		} else if (key.equals("R")) {
+			auto = new RightAuto();
+		} else if (key.equals("C")){
+			auto = new CenterAuto();
+		} else if (key.equals("B")) {
+			auto = new Move(-148.0);
+		}
+    
 		if (auto != null) {
 			auto.start();
 		}
@@ -139,6 +162,7 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
+		timer.start();
 		
 	}
 

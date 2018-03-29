@@ -13,6 +13,9 @@ public class Logger {
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
+		SmartDashboard.putNumber("Time",Robot.timer.get());
+		
+		//SmartDashboard.putNumber(key, );
 		
 		SmartDashboard.putNumber("LeftX", leftX);
 		SmartDashboard.putNumber("LeftY", leftY);
@@ -34,9 +37,17 @@ public class Logger {
 		SmartDashboard.putNumber("RearLeftMotorCurrent", Robot.drive.rearLeft.getOutputCurrent());
 		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
 		
+		SmartDashboard.putNumber("LeftConveyorCurrent", Robot.conveyor.conveyorLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightConveyorCurrent", Robot.conveyor.conveyorRight.getOutputCurrent());
+		
+		SmartDashboard.putNumber("LeftIntakeCurrent", Robot.intake.intakeLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightIntakeCurrent", Robot.intake.intakeRight.getOutputCurrent());
+		
 		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
-		SmartDashboard.putNumber("IntakeState", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
+		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
+		
+		SmartDashboard.getString("Position (B, L,R,C): ", "");
 		
 	}
 	

@@ -25,7 +25,7 @@ public class Move extends Command {
 	
 	public Move(double displacement) {
 		pid = new SynchronousPID();	
-		pid.setOutputRange(-0.5, 0.5);
+		pid.setOutputRange(-1.0, 1.0);
 		
 	    	movement = displacement;
 	    	
@@ -36,9 +36,9 @@ public class Move extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("MoveP", 0.02); 
+		double Kp = SmartDashboard.getNumber("MoveP", 0.022); 
 		double Ki = SmartDashboard.getNumber("MoveI", 0.0);
-		double Kd = SmartDashboard.getNumber("MoveD", 0.2);
+		double Kd = SmartDashboard.getNumber("MoveD", 0.3);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
 import org.usfirst.frc.team4308.robot.OI;
+import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.RobotMap;
 import org.usfirst.frc.team4308.robot.commands.AbsoluteIntake;
 
@@ -11,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
 	
-	public static WPI_TalonSRX intakeLeft, intakeRight;
+	public WPI_TalonSRX intakeLeft, intakeRight;
 	
 	public enum IntakeState {
 		OPEN, CLOSE, OFF
@@ -19,8 +20,8 @@ public class Intake extends Subsystem {
 	
 	public IntakeState state = IntakeState.CLOSE;
 	
-	public static DoubleSolenoid solenoidLeft;
-	public static DoubleSolenoid solenoidRight;
+	public DoubleSolenoid solenoidLeft;
+	public DoubleSolenoid solenoidRight;
 	
 	public Intake() {
 //		c = new Compressor();
@@ -66,13 +67,17 @@ public class Intake extends Subsystem {
 	
 	public void intakeControl() {
 		
-		double leftTrigger  = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
-		double rightTrigger = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
+		Robot.pdp.clearStickyFaults();
 		
-		double diff = leftTrigger - rightTrigger;
+		moveIntake(OI.getIntakeSchemeLeft(), OI.getIntakeSchemeRight());
 		
-		intakeLeft.set(diff);
-		intakeRight.set(diff);
+	}
+	
+	public void moveIntake(double left, double right) {
+
+		intakeLeft.set(left);
+		intakeRight.set(right);
+		
 	}
 	
 	
