@@ -15,7 +15,7 @@ public class LeftAuto extends CommandGroup {
 			addSequential(new Move(-20.0)); // For generous overshooting
 			addSequential(new PullConveyor(false), 2.5);
 		} else {
-			//Alliance Switch is on the Right Side; Ignore and go for BaseLine
+			//Alliance Switch is on the right; ignore and go for baseLine
 			addSequential(new Move(-148.0)); // Move 148"
 		}
 	}

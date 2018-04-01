@@ -14,7 +14,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Move(-105.0));
 //			addSequential(new PullConveyor(false), 2.5);
 			
-			// Old theoretical auto
+			// Ryerson Tested Auto
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
@@ -28,7 +28,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Move(-105.0));
 //			addSequential(new PullConveyor(false), 2.5);
 			
-			// Old theoretical auto
+			// Ryerson Tested Auto
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
