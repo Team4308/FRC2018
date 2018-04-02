@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.commands.SetFlag;
 import org.usfirst.frc.team4308.robot.commands.SwitchCompressor;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
@@ -61,14 +62,18 @@ public class OI {
 //		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 //		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
-//		A2.whenPressed(new IntakeToggle(ToggleType.SWITCH));
+//		A1.whenPressed(new IntakeToggle(ToggleType.SWITCH));
+//		B1.whenPressed(new IntakeToggle(ToggleType.OFF));
 		
 		// Dual controller controls
-		B2.whenPressed(new IntakeToggle(ToggleType.OFF));
 		
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
+		A2.whenPressed(new SetFlag(0, false, 0.3));
+		B2.whileHeld(new SetFlag(0, false, -1));
+		X2.whenPressed(new SetFlag(0, true, 0.3));
+		Y2.whileHeld(new SetFlag(0, true, -1));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());
