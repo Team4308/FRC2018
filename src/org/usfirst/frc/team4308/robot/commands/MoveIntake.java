@@ -9,9 +9,11 @@ public class MoveIntake extends Command {
 	private double left;
 	private double right;
 
-	public MoveIntake(double left, double right) {
+	public MoveIntake(double left, double right, double time) {
 		this.left = left;
 		this.right = right;
+		
+		setTimeout(time);
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class MoveIntake extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return isTimedOut();
 	}
 
 	protected void end() {
