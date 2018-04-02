@@ -9,6 +9,7 @@ package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.commands.SetFlag;
+import org.usfirst.frc.team4308.robot.commands.SetRobotState;
 import org.usfirst.frc.team4308.robot.commands.SwitchCompressor;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
@@ -70,10 +71,10 @@ public class OI {
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
-		A2.whenPressed(new SetFlag(0, false, 0.3));
+		A2.whenPressed(new SetRobotState("cube drop"));
 		B2.whileHeld(new SetFlag(0, false, -1));
-		X2.whenPressed(new SetFlag(0, true, 0.3));
-		Y2.whileHeld(new SetFlag(0, true, -1));
+		X2.whileHeld(new SetFlag(0, true, -1));
+		Y2.whileHeld(new SetRobotState("rave"));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());

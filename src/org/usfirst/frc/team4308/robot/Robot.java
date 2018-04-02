@@ -23,6 +23,7 @@ import org.usfirst.frc.team4308.robot.auto.LeftAuto;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.RightAuto;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.subsystems.Arduino;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
@@ -47,15 +48,17 @@ public class Robot extends TimedRobot {
 	public static PowerDistributionPanel pdp;
 	public static Intake intake;
 	public static Conveyor conveyor;
-	public static Timer timer;
 	public static Compressor c;
 	public static Flags flags;
+	public static Arduino leds;
 
 	public static String gameData = "";
 	
-	public static SendableChooser<String> autoChooser;
+//	public static SendableChooser<String> autoChooser;
 	public static Command auto;
 
+	private boolean endgameAlerted = false;
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -66,20 +69,20 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
-		c = new Compressor(1);
+		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
 		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
-		timer = new Timer();
 		flags = new Flags();
+		leds = new Arduino();
 		
 		auto = null;
-		autoChooser = new SendableChooser<String>();
 		
-		/*autoChooser.addObject("Baseline", "BaselineAuto");
+		/*autoChooser = new SendableChooser<String>();
+		autoChooser.addObject("Baseline", "BaselineAuto");
 		autoChooser.addObject("Left", "LeftAuto");
 		autoChooser.addObject("Right", "RightAuto");
 		autoChooser.addObject("Center", "CenterAuto");
@@ -87,6 +90,7 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
 		
+		SmartDashboard.putString("Alliance(red,blue):", SmartDashboard.getString("Position(red,blue)","red"));
 
 		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
@@ -133,6 +137,16 @@ public class Robot extends TimedRobot {
 		while (gameData.equals("")) {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
+		
+		leds.setAlliance(SmartDashboard.getString("Alliance(red,blue):", "red"));
+		leds.setState("normal");
+		if (gameData.charAt(0) == 'L') {
+			leds.setState("auto left");
+		}
+		else {
+			leds.setState("auto right");
+		}
+		
 		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
 		if(key.equals("L")) {
 			auto = new LeftAuto();
@@ -165,7 +179,6 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
-		timer.start();
 		
 	}
 
@@ -176,6 +189,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		Logger.log();
+		
+		if (!endgameAlerted && Timer.getMatchTime() <= 30) {
+			leds.setState("endgame");
+			endgameAlerted = true;
+		}
 	}
 
 	/**
