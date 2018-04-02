@@ -48,7 +48,6 @@ public class Robot extends TimedRobot {
 	public static PowerDistributionPanel pdp;
 	public static Intake intake;
 	public static Conveyor conveyor;
-	public static Timer timer;
 	public static Compressor c;
 	public static Flags flags;
 	public static Arduino leds;
@@ -58,6 +57,8 @@ public class Robot extends TimedRobot {
 //	public static SendableChooser<String> autoChooser;
 	public static Command auto;
 
+	private boolean endgameAlerted = false;
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -75,7 +76,6 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
-		timer = new Timer();
 		flags = new Flags();
 		leds = new Arduino();
 		
@@ -139,6 +139,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		leds.setAlliance(SmartDashboard.getString("Alliance(red,blue):", "red"));
+		leds.setState("normal");
 		if (gameData.charAt(0) == 'L') {
 			leds.setState("auto left");
 		}
@@ -178,7 +179,6 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
-		timer.start();
 		
 	}
 
@@ -189,6 +189,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		Logger.log();
+		
+		if (!endgameAlerted && Timer.getMatchTime() <= 30) {
+			leds.setState("endgame");
+			endgameAlerted = true;
+		}
 	}
 
 	/**

@@ -1,14 +1,15 @@
 package org.usfirst.frc.team4308.robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Logger {
 	
 	public static void log() {
 
-		SmartDashboard.putNumber("Time", Robot.timer.get());
-
-		SmartDashboard.getString("Position (B,L,R,C): ", "");
+		SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
+		
+//		SmartDashboard.getString("Position (B,L,R,C): ", "");
 		
 //		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);

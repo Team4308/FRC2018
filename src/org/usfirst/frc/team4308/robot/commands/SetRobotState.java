@@ -6,14 +6,35 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class SetRobotState extends Command {
 	
+	private String state;
+	private boolean sent = false;
+	
 	public SetRobotState(String state) {
-		Robot.leds.setState(state);
+		this.state = state;
+	}
+	
+	@Override
+	protected void execute() {
+		super.execute();
+		
+		if (!sent) {
+			Robot.leds.setState(state);
+			sent = true;
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
+	}
+	
+	protected void end() {
+		Robot.leds.setState("normal");
+	}
+
+	protected void interrupted() {
+		Robot.leds.setState("normal");
 	}
 
 }

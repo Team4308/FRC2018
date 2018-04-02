@@ -7,6 +7,7 @@ public class Arduino extends Subsystem {
 	
 	private SerialPort serial;
 	private String alliance;
+	private String currentState;
 	
 	public Arduino() {
 		serial = new SerialPort(9600, SerialPort.Port.kUSB1);
@@ -23,8 +24,15 @@ public class Arduino extends Subsystem {
 	}
 	
 	public void setState(String state) {
+		
+		if (currentState.equals(state)) {
+			return;
+		}
+		
+		currentState = state;
+		
 		switch(state) {
-			case "normal":
+			case "normal":  // set in OI.getConveyorScheme(); and SetRobotState end/interrupted
 				if (alliance.equals("red")) {
 					stateRed();
 				}
@@ -33,11 +41,11 @@ public class Arduino extends Subsystem {
 				}
 				break;
 			
-			case "rave":
+			case "rave":  // set in OI
 				stateRave();
 				break;
 			
-			case "conveyor down":
+			case "conveyor down":  // set in OI.getConveyorScheme();
 				if (alliance.equals("red")) {
 					stateRedConveyorDown();
 				}
@@ -46,7 +54,7 @@ public class Arduino extends Subsystem {
 				}
 				break;
 			
-			case "conveyor up":
+			case "conveyor up":  // set in OI.getConveyorScheme();
 				if (alliance.equals("red")) {
 					stateRedConveyorUp();
 				}
@@ -55,23 +63,23 @@ public class Arduino extends Subsystem {
 				}
 				break;
 			
-			case "cube drop":
+			case "cube drop":  // set in OI
 				messageCubeDrop();
 				break;
 			
-			case "endgame":
+			case "endgame":  // set in Robot
 				messageEndgame();
 				break;
 				
-			case "auto left":
+			case "auto left":  // set in Robot
 				messageAutoLeft();
 				break;
 				
-			case "auto right":
+			case "auto right":  // set in Robot
 				messageAutoRight();
 				break;
 				
-			default:
+			default:  // off
 				stateOff();
 				break;
 		}
