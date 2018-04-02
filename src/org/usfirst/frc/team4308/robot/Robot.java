@@ -26,6 +26,7 @@ import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4308.robot.subsystems.Flags;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team4308.robot.subsystems.Intake;
 import org.usfirst.frc.team4308.robot.subsystems.USBVision;
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
 	public static Conveyor conveyor;
 	public static Timer timer;
 	public static Compressor c;
+	public static Flags flags;
 
 	public static String gameData = "";
 	
@@ -72,6 +74,7 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
 		conveyor = new Conveyor();
 		timer = new Timer();
+		flags = new Flags();
 		
 		auto = null;
 		autoChooser = new SendableChooser<String>();
