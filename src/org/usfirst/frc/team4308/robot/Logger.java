@@ -1,21 +1,19 @@
 package org.usfirst.frc.team4308.robot;
 
-import org.usfirst.frc.team4308.robot.subsystems.Intake.IntakeState;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Logger {	
+public class Logger {
 	
 	public static void log() {
+
+		SmartDashboard.putNumber("Time", Robot.timer.get());
+
+		SmartDashboard.getString("Position (B,L,R,C): ", "");
 		
 //		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
 //		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
-		
-		SmartDashboard.putNumber("Time", Robot.timer.get());
-		
-		//SmartDashboard.putNumber(key, );
 		
 //		SmartDashboard.putNumber("LeftX", leftX);
 //		SmartDashboard.putNumber("LeftY", leftY);
@@ -45,9 +43,7 @@ public class Logger {
 		
 //		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
-		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
-		
-		SmartDashboard.getString("Position (B,L,R,C): ", "");
+//		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
 		
 	}
 	

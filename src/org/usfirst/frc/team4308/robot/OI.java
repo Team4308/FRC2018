@@ -70,10 +70,10 @@ public class OI {
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));
 		
-		A2.whenPressed(new SetFlag(0, false, 0.3));
+//		A2.whenPressed(new SetFlag(0, false, 0.3));
 		B2.whileHeld(new SetFlag(0, false, -1));
-		X2.whenPressed(new SetFlag(0, true, 0.3));
-		Y2.whileHeld(new SetFlag(0, true, -1));
+		X2.whileHeld(new SetFlag(0, true, -1));
+//		Y2.whenPressed(new SetFlag(0, true, -1));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());

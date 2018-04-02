@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arduino extends Subsystem {
 	
 	private SerialPort serial;
+	private String alliance;
 	
 	public Arduino() {
 		serial = new SerialPort(9600, SerialPort.Port.kUSB1);
@@ -15,6 +16,65 @@ public class Arduino extends Subsystem {
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setAlliance(String alliance) {
+		this.alliance = alliance;
+	}
+	
+	public void setState(String state) {
+		switch(state) {
+			case "normal":
+				if (alliance.equals("red")) {
+					stateRed();
+				}
+				else {
+					stateBlue();
+				}
+				break;
+			
+			case "rave":
+				stateRave();
+				break;
+			
+			case "conveyor down":
+				if (alliance.equals("red")) {
+					stateRedConveyorDown();
+				}
+				else {
+					stateBlueConveyorDown();
+				}
+				break;
+			
+			case "conveyor up":
+				if (alliance.equals("red")) {
+					stateRedConveyorUp();
+				}
+				else {
+					stateBlueConveyorUp();
+				}
+				break;
+			
+			case "cube drop":
+				messageCubeDrop();
+				break;
+			
+			case "endgame":
+				messageEndgame();
+				break;
+				
+			case "auto left":
+				messageAutoLeft();
+				break;
+				
+			case "auto right":
+				messageAutoRight();
+				break;
+				
+			default:
+				stateOff();
+				break;
+		}
 	}
 	
 	public void stateOff() {
