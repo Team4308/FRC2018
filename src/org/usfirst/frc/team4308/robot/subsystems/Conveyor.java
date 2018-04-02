@@ -52,6 +52,17 @@ public class Conveyor extends Subsystem {
 	public void moveConveyor(double move) {
 		conveyorLeft.set(move);
 		conveyorRight.set(move);
+		
+
+		if (move > 0.2) {
+			Robot.leds.setState("conveyor down");
+		}
+		else if (move < -0.2) {
+			Robot.leds.setState("conveyor up");
+		}
+		else {
+			Robot.leds.setState("conveyor stop");
+		}
 	}
 
 }
