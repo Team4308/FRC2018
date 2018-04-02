@@ -1,16 +1,21 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arduino extends Subsystem {
 	
 	private SerialPort serial;
-	private String alliance;
 	private String currentState;
+	private DriverStation ds;
 	
 	public Arduino() {
 		serial = new SerialPort(9600, SerialPort.Port.kUSB1);
+		currentState = "";
+		ds = DriverStation.getInstance();
 	}
 
 	@Override
@@ -19,11 +24,11 @@ public class Arduino extends Subsystem {
 
 	}
 	
-	public void setAlliance(String alliance) {
-		this.alliance = alliance;
-	}
-	
 	public void setState(String state) {
+		
+		Alliance a = ds.getAlliance();
+		String alliance = a.name().toString();
+		SmartDashboard.putString("al", alliance);
 		
 		String updatedState = state;
 		
@@ -40,8 +45,8 @@ public class Arduino extends Subsystem {
 		currentState = updatedState;
 		
 		switch(updatedState) {
-			case "normal":  // set in OI.getConveyorScheme(); and SetRobotState end/interrupted
-				if (alliance.equals("red")) {
+			default:  // set in OI.getConveyorScheme(); and SetRobotState end/interrupted (normal)
+				if (alliance.equalsIgnoreCase("red")) {
 					stateRed();
 				}
 				else {
@@ -87,9 +92,9 @@ public class Arduino extends Subsystem {
 				messageAutoRight();
 				break;
 				
-			default:  // off
-				stateOff();
-				break;
+//			default:  // off
+//				stateOff();
+//				break;
 		}
 	}
 	

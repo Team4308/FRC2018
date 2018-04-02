@@ -15,13 +15,18 @@ public class CenterAuto extends CommandGroup {
 		if (Robot.gameData.charAt(0) == 'L') {
 			
 			// New auto
-			addSequential(new Move(-11.0));
-			addSequential(new Rotate(-35.0));
-			addSequential(new TimedMove(3.0, -1.0)); // For generous overshooting
-			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+//			addSequential(new Move(-11.0));
+//			addSequential(new Rotate(-34.0));
+//			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+//			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
 			
-//			addSequential(new Move(-110.0));
-//			addSequential(new PullConveyor(false), 2.5);
+			// Safer auto
+			addSequential(new Move(-20.0)); // Move 20" forward
+			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
+			addSequential(new Move(-88.0)); // Move 62.25" left and forward
+			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
+			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
+			addSequential(new PullConveyor(false), 1.0);
 			
 			// Ryerson tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -35,11 +40,11 @@ public class CenterAuto extends CommandGroup {
 			if (key.contains("2")) {
 				addSequential(new Move(50.0));
 				addSequential(new Rotate(-90.0)); 
-				addSequential(new Move(56.5));
 				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(56.5));
 				addSequential(new Rotate(-90.0));
-				addSequential(new Move(10.0));
 				addParallel(new MoveIntake(1.0, 1.0, 2.0));
+				addSequential(new Move(10.0));
 				
 				if (key.contains("S")) {
 					addSequential(new IntakeToggle(ToggleType.CLOSE));
@@ -47,9 +52,9 @@ public class CenterAuto extends CommandGroup {
 					addSequential(new Rotate(-90.0));
 					addSequential(new Move(56.5));
 					addSequential(new Rotate(-90.0));
-					
-					addSequential(new TimedMove(1.0, -1.0)); // For generous overshooting
-					addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+
+					addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
+					addSequential(new PullConveyor(false), 1.0);
 				}
 			}
 			
@@ -58,19 +63,24 @@ public class CenterAuto extends CommandGroup {
 		else {
 			
 			//New auto
-			addSequential(new Move(-11.0));
-			addSequential(new Rotate(30.0));
-			addSequential(new TimedMove(3.0, -1.0)); // For generous overshooting
-			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+//			addSequential(new Move(-11.0));
+//			addSequential(new Rotate(29.0));
+//			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+//			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
 			
-//			addSequential(new Move(-110.0));
-//			addSequential(new PullConveyor(false), 2.5);
-			
+			// Safer auto
+			addSequential(new Move(-20.0)); // Move 20" forward
+			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
+			addSequential(new Move(-88.0)); // Move 62.25" left and forward
+			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
+			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
+			addSequential(new PullConveyor(false), 1.0);
+						
 			// Ryerson tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
-//			addSequential(new Rotate(45.0)); // Rotate 45 degrees left
+//			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
 //			addSequential(new Move(-72.0)); // Move 50.75" left and forward
-//			addSequential(new Rotate(-45.0)); // Rotate 45 degrees right (straighten)
+//			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
 //			addSequential(new Move(-42.0)); // Move 32" forward (overshooting 29.25")
 //			addSequential(new PullConveyor(false), 2.5);
 			
@@ -78,11 +88,11 @@ public class CenterAuto extends CommandGroup {
 			if (key.contains("2")) {
 				addSequential(new Move(50.0));
 				addSequential(new Rotate(90.0)); 
-				addSequential(new Move(56.5));
 				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(56.5));
 				addSequential(new Rotate(90.0));
-				addSequential(new Move(10.0));
 				addParallel(new MoveIntake(1.0, 1.0, 2.0));
+				addSequential(new Move(10.0));
 				
 				if (key.contains("S")) {
 					addSequential(new IntakeToggle(ToggleType.CLOSE));
@@ -90,9 +100,9 @@ public class CenterAuto extends CommandGroup {
 					addSequential(new Rotate(90.0));
 					addSequential(new Move(56.5));
 					addSequential(new Rotate(90.0));
-					
-					addSequential(new TimedMove(1.0, -1.0)); // For generous overshooting
-					addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+
+					addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
+					addSequential(new PullConveyor(false), 1.0);
 				}
 			}
 		}
@@ -104,8 +114,8 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Rotate(-90.0));
 			addSequential(new Move(25.0));
 			addSequential(new Rotate(-90.0));
-			addSequential(new Move(-25.0));
 			addParallel(new IntakeToggle(ToggleType.OPEN));
+			addSequential(new Move(-25.0));
 			addSequential(new MoveIntake(-1.0, -1.0, 2.0));
 		}
 	}

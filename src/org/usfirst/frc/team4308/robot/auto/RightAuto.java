@@ -19,8 +19,8 @@ public class RightAuto extends CommandGroup {
 				addSequential(new Rotate(-90.0)); // Rotate 90 degrees to the left
 				addSequential(new Move(-82.0));  // Move 82"
 				addSequential(new Rotate(-90.0)); // Rotate 90 degrees to the left
-				addSequential(new TimedMove(1.0, -1.0)); // For generous overshooting
-				addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+				addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
+				addSequential(new PullConveyor(false), 1.0); // Move conveyor
 			}
 			// No special setting, do not score cube
 			else {
@@ -31,8 +31,8 @@ public class RightAuto extends CommandGroup {
 		else {
 			addSequential(new Move(-148.0)); // Move 148"
 			addSequential(new Rotate(-90.0)); // Rotate 90 degrees to the left
-			addSequential(new TimedMove(1.0, -1.0)); // For generous overshooting
-			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
+			addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
+			addSequential(new PullConveyor(false), 1.0); // Move conveyor
 		}
 
 	}

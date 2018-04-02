@@ -90,8 +90,6 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
 		
-		SmartDashboard.putString("Alliance(red,blue):", SmartDashboard.getString("Position(red,blue)","red"));
-
 		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
 		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.28));
@@ -138,7 +136,6 @@ public class Robot extends TimedRobot {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
 		
-		leds.setAlliance(SmartDashboard.getString("Alliance(red,blue):", "red"));
 		leds.setState("normal");
 		if (gameData.charAt(0) == 'L') {
 			leds.setState("auto left");
