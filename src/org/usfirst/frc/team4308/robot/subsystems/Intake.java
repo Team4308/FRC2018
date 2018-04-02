@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
 	public DoubleSolenoid solenoidRight;
 	
 	public Intake() {
-//		c = new Compressor();
+
 		solenoidLeft = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.Intake.solenoidLeftForward, RobotMap.Intake.solenoidLeftReverse);
 		solenoidRight = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.Intake.solenoidRightForward, RobotMap.Intake.solenoidRightReverse);
 		
