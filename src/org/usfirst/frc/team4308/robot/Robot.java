@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
 	public static String gameData = "";
 	
-	public static SendableChooser<String> autoChooser;
+//	public static SendableChooser<String> autoChooser;
 	public static Command auto;
 
 	/**
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
 		LiveWindow.disableAllTelemetry();
 		
-		c = new Compressor(1);
+		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
 		usb = new USBVision();
 		navx = new Gyroscope();
@@ -77,16 +77,15 @@ public class Robot extends TimedRobot {
 		flags = new Flags();
 		
 		auto = null;
-		autoChooser = new SendableChooser<String>();
 		
-		/*autoChooser.addObject("Baseline", "BaselineAuto");
+		/*autoChooser = new SendableChooser<String>();
+		autoChooser.addObject("Baseline", "BaselineAuto");
 		autoChooser.addObject("Left", "LeftAuto");
 		autoChooser.addObject("Right", "RightAuto");
 		autoChooser.addObject("Center", "CenterAuto");
 		SmartDashboard.putData("StartingPosition", autoChooser);*/
 		
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
-		
 
 		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
