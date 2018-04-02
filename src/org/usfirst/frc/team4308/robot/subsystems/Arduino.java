@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Arduino extends Subsystem {
 	
-	
 	private SerialPort serial;
 	
 	public Arduino() {
