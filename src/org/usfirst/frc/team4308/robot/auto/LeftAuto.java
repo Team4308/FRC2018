@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LeftAuto extends CommandGroup {
 
-	public LeftAuto() {
+	public LeftAuto(String key) {
 		if (Robot.gameData.charAt(0) == 'L') {
 			// Alliance Switch is on the left; attempt to score cube!
 			addSequential(new Move(-148.0)); // Move 148"

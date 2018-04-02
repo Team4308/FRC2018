@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightAuto extends CommandGroup {
   
-	public RightAuto(){
+	public RightAuto(String key){
 		if (Robot.gameData.charAt(0) == ('L')) {
 			//Alliance Switch is on the left side; ignore and cross baseline
 			addSequential(new Move(-148.0)); // Move 148"

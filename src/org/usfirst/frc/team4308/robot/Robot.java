@@ -148,13 +148,13 @@ public class Robot extends TimedRobot {
 		}
 		
 		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
-		if(key.equals("L")) {
-			auto = new LeftAuto();
-		} else if (key.equals("R")) {
-			auto = new RightAuto();
-		} else if (key.equals("C")){
-			auto = new CenterAuto();
-		} else if (key.equals("B")) {
+		if(key.startsWith("L")) {
+			auto = new LeftAuto(key.substring(1));
+		} else if (key.startsWith("R")) {
+			auto = new RightAuto(key.substring(1));
+		} else if (key.startsWith("C")){
+			auto = new CenterAuto(key.substring(1));
+		} else {
 			auto = new Move(-148.0);
 		}
     
