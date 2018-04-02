@@ -119,16 +119,6 @@ public class OI {
 //		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-		if (leftY > 0.2) {
-			Robot.leds.setState("conveyor down");
-		}
-		else if (leftY < -0.2) {
-			Robot.leds.setState("conveyor up");
-		}
-		else {
-			Robot.leds.setState("normal");
-		}
-		
 		return -leftY;
 		
 	}

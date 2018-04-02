@@ -14,6 +14,11 @@ public class SetRobotState extends Command {
 	}
 	
 	@Override
+	protected void initialize() {
+		sent = false;
+	}
+	
+	@Override
 	protected void execute() {
 		super.execute();
 		

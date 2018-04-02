@@ -25,13 +25,21 @@ public class Arduino extends Subsystem {
 	
 	public void setState(String state) {
 		
+		String updatedState = state;
+		
 		if (currentState.equals(state)) {
 			return;
 		}
 		
-		currentState = state;
+		if (currentState.equals("conveyor down") || currentState.equals("conveyor up")) {
+			if (state.equals("conveyor stop")) {
+				updatedState = "normal";
+			}
+		}
 		
-		switch(state) {
+		currentState = updatedState;
+		
+		switch(updatedState) {
 			case "normal":  // set in OI.getConveyorScheme(); and SetRobotState end/interrupted
 				if (alliance.equals("red")) {
 					stateRed();
@@ -45,7 +53,7 @@ public class Arduino extends Subsystem {
 				stateRave();
 				break;
 			
-			case "conveyor down":  // set in OI.getConveyorScheme();
+			case "conveyor down":  // set in Conveyor.moveConveyor();
 				if (alliance.equals("red")) {
 					stateRedConveyorDown();
 				}
@@ -54,7 +62,7 @@ public class Arduino extends Subsystem {
 				}
 				break;
 			
-			case "conveyor up":  // set in OI.getConveyorScheme();
+			case "conveyor up":  // set in Conveyor.moveConveyor();
 				if (alliance.equals("red")) {
 					stateRedConveyorUp();
 				}
