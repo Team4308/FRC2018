@@ -245,6 +245,8 @@ void NewPattern()
       break;
     case 'D':  // Rave - rainbow bouncing
       setPatternD();
+      temporaryStateTimer = 200;
+      useTimer = true;
       currentSpeed = 100;
       currentDirection = 1;
       break;
