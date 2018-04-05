@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 		
 		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
-		usb = new USBVision();
+//		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
@@ -90,11 +90,11 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
 		
-		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.06)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.28));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35));
 
-		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.022)); 
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.023)); 
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
 		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
 		

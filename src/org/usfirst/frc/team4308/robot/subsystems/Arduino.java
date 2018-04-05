@@ -28,7 +28,6 @@ public class Arduino extends Subsystem {
 		
 		Alliance a = ds.getAlliance();
 		String alliance = a.name().toString();
-		SmartDashboard.putString("al", alliance);
 		
 		String updatedState = state;
 		
