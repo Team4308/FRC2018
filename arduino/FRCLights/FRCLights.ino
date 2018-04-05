@@ -22,7 +22,7 @@ char previousPattern;
 bool wrap;
 bool useTimer;
 
-#define CONVEYOR_SPEED  150
+#define CONVEYOR_SPEED  100
 
 void setup() 
 {
@@ -245,6 +245,8 @@ void NewPattern()
       break;
     case 'D':  // Rave - rainbow bouncing
       setPatternD();
+      temporaryStateTimer = 200;
+      useTimer = true;
       currentSpeed = 100;
       currentDirection = 1;
       break;
@@ -340,17 +342,17 @@ void setPatternD()
 
 void setPatternE() 
 {
-  for (int i = 0; i < 10; i++) {
-    colorPatternLeft[i+5] = CHSV(0, 255, 255);
-    colorPatternRight[i+5] = CHSV(0, 255, 255);
+  for (int i = 0; i < 8; i++) {
+    colorPatternLeft[i+6] = CHSV(0, 255, 255);
+    colorPatternRight[i+6] = CHSV(0, 255, 255);
   }
 }
 
 void setPatternG() 
 {
-  for (int i = 0; i < 10; i++) {
-    colorPatternLeft[i+5] = CHSV(160, 255, 255);
-    colorPatternRight[i+5] = CHSV(160, 255, 255);
+  for (int i = 0; i < 8; i++) {
+    colorPatternLeft[i+6] = CHSV(160, 255, 255);
+    colorPatternRight[i+6] = CHSV(160, 255, 255);
   }
 }
 
