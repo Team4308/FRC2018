@@ -2,12 +2,15 @@ package org.usfirst.frc.team4308.robot.auto;
 
 import org.usfirst.frc.team4308.robot.Robot;
 import org.usfirst.frc.team4308.robot.commands.PullConveyor;
+import org.usfirst.frc.team4308.robot.commands.SetFlag;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightAuto extends CommandGroup {
   
 	public RightAuto(String key){
+		
+		addParallel(new SetFlag(0, false, 1.3));
 		
 		// Alliance switch is on the left
 		if (Robot.gameData.charAt(0) == ('L')) {

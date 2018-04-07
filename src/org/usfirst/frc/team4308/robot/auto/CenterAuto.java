@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterAuto extends CommandGroup {
 	public CenterAuto(String key){
 		
-		addParallel(new SetFlag(0, false, 1.0));
+		addParallel(new SetFlag(0, false, 1.3));
 		
 		// Left side is our alliance switch
 		if (Robot.gameData.charAt(0) == 'L') {
@@ -28,7 +28,8 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
-			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
+			addSequential(new Move(-18)); // Move 18" forward (overshooting 18")
+//			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
 			addSequential(new PullConveyor(false), 1.0);
 			
 			// Ryerson tested auto
@@ -76,7 +77,8 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
-			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
+			addSequential(new Move(-30.0)); // Move 30" forward (overshooting 29.25")
+//			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
 			addSequential(new PullConveyor(false), 1.0);
 						
 			// Ryerson tested auto
