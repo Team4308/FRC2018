@@ -19,12 +19,10 @@ public class AbsoluteIntake extends Command {
 	}
 	
 	protected void end() {
-    		Robot.intake.stopIntake();
-    		Robot.intake.closeIntake();
+		
     }
 	
 	protected void interrupted() {
-		Robot.intake.stopIntake();
-		Robot.intake.closeIntake();
+		
 	}
 }

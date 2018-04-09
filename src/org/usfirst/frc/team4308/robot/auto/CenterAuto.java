@@ -23,7 +23,7 @@ public class CenterAuto extends CommandGroup {
 //			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
 //			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
 			
-			// Safer auto
+			// McMaster tested auto
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
@@ -42,8 +42,16 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Move(-30.0)); // Move 20" forward (overshooting 17.75")
 //			addSequential(new PullConveyor(false), 2.5);
 			
+			// Reset to center
+			if (key.contains("R")) {
+				addSequential(new Move(60.0));
+				addSequential(new Rotate(-90.0)); 
+				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(54.5)); // 56.5
+				addSequential(new Rotate(-90.0));
+			}
 			// Get another cube
-			if (key.contains("2")) {
+			else if (key.contains("2")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(-90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
@@ -74,7 +82,7 @@ public class CenterAuto extends CommandGroup {
 //			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
 //			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
 			
-			// Safer auto
+			// McMaster tested auto
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
@@ -91,8 +99,16 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Move(-42.0)); // Move 32" forward (overshooting 29.25")
 //			addSequential(new PullConveyor(false), 2.5);
 			
+			// Reset to center
+			if (key.contains("R")) {
+				addSequential(new Move(60.0));
+				addSequential(new Rotate(90.0)); 
+				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(56.5)); // 56.5
+				addSequential(new Rotate(90.0));
+			}
 			// Get another cube
-			if (key.contains("2")) {
+			else if (key.contains("2")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
