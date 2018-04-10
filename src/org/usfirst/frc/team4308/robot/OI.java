@@ -97,6 +97,12 @@ public class OI {
 		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
+		if (rightX <= 0) {
+			rightX = -(rightX*rightX);
+		} else {
+			rightX = (rightX*rightX);
+		}
+		
 		return (leftY + rightX);
 		
 	}
@@ -107,6 +113,12 @@ public class OI {
 		double leftY = -driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
 		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		
+		if (rightX <= 0) {
+			rightX = -(rightX*rightX);
+		} else {
+			rightX = (rightX*rightX);
+		}
 		
 		return (leftY - rightX);
 		
