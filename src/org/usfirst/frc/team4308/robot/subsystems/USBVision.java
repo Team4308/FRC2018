@@ -18,7 +18,7 @@ public class USBVision extends Subsystem {
 		// TODO Auto-generated constructor stub
 		new Thread(() -> {
             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-            camera.setResolution(640, 480);
+            camera.setFPS(25);
             
             CvSink cvSink = CameraServer.getInstance().getVideo();
             CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);

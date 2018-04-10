@@ -31,15 +31,15 @@ public class SetRobotState extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	protected void end() {
-		Robot.leds.setState("normal");
+//		Robot.leds.setState("normal");
 	}
 
 	protected void interrupted() {
-		Robot.leds.setState("normal");
+//		Robot.leds.setState("normal");
 	}
 
 }

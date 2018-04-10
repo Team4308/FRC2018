@@ -11,15 +11,15 @@ public class Logger {
 		
 //		SmartDashboard.getString("Position (B,L,R,C): ", "");
 		
-//		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
-//		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
-//		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
-//		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
+		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
+		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
+		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-//		SmartDashboard.putNumber("LeftX", leftX);
-//		SmartDashboard.putNumber("LeftY", leftY);
-//		SmartDashboard.putNumber("RightX", rightX);
-//		SmartDashboard.putNumber("RightY", rightY);
+		SmartDashboard.putNumber("LeftX", leftX);
+		SmartDashboard.putNumber("LeftY", leftY);
+		SmartDashboard.putNumber("RightX", rightX);
+		SmartDashboard.putNumber("RightY", rightY);
 		
 //		SmartDashboard.putNumber("LeftEncoderPosition", Robot.drive.getLeftSensorPosition());
 //		SmartDashboard.putNumber("LeftEncoderVelocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));

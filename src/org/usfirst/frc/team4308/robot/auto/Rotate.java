@@ -26,7 +26,7 @@ public class Rotate extends Command {
 		pid = new SynchronousPID();
 		pid.setOutputRange(-0.8, 0.8);
 		
-    	rotation = angle;
+    		rotation = angle;
 	    	
 		requires(Robot.drive);
 		setTimeout(0.7);
@@ -35,9 +35,9 @@ public class Rotate extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("RotateP", 0.05); 
+		double Kp = SmartDashboard.getNumber("RotateP", 0.08); 
 		double Ki = SmartDashboard.getNumber("RotateI", 0.0);
-		double Kd = SmartDashboard.getNumber("RotateD", 0.28);
+		double Kd = SmartDashboard.getNumber("RotateD", 0.35);
 		
 		pid.setPID(Kp, Ki, Kd);
 		pid.reset();
@@ -60,7 +60,7 @@ public class Rotate extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(5) || isTimedOut();
+		return pid.onTarget(0.5) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

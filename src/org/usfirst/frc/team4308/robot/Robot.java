@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 		
 		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
-		usb = new USBVision();
+//		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
@@ -90,13 +90,11 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
 		
-		SmartDashboard.putString("Alliance(red,blue):", SmartDashboard.getString("Position(red,blue)","red"));
-
-		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.05)); 
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.06)); 
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.28));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35));
 
-		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.022)); 
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.023)); 
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
 		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
 		
@@ -138,7 +136,6 @@ public class Robot extends TimedRobot {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
 		
-		leds.setAlliance(SmartDashboard.getString("Alliance(red,blue):", "red"));
 		leds.setState("normal");
 		if (gameData.charAt(0) == 'L') {
 			leds.setState("auto left");
@@ -148,13 +145,13 @@ public class Robot extends TimedRobot {
 		}
 		
 		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
-		if(key.equals("L")) {
-			auto = new LeftAuto();
-		} else if (key.equals("R")) {
-			auto = new RightAuto();
-		} else if (key.equals("C")){
-			auto = new CenterAuto();
-		} else if (key.equals("B")) {
+		if(key.startsWith("L")) {
+			auto = new LeftAuto(key.substring(1));
+		} else if (key.startsWith("R")) {
+			auto = new RightAuto(key.substring(1));
+		} else if (key.startsWith("C")){
+			auto = new CenterAuto(key.substring(1));
+		} else {
 			auto = new Move(-148.0);
 		}
     

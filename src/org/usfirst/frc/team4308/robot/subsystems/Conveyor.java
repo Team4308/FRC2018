@@ -55,10 +55,10 @@ public class Conveyor extends Subsystem {
 		
 
 		if (move > 0.2) {
-			Robot.leds.setState("conveyor down");
+			Robot.leds.setState("conveyor up");
 		}
 		else if (move < -0.2) {
-			Robot.leds.setState("conveyor up");
+			Robot.leds.setState("conveyor down");
 		}
 		else {
 			Robot.leds.setState("conveyor stop");
