@@ -21,18 +21,26 @@ public class RobotMap {
 
 	public static final double encoderPulseDistance = 0.042;
 
-	public static final int PCM_ID = 9;
-	public static final int PDP_ID = 8;
+	public static final int PCM_ID = 1;
+	public static final int PDP_ID = 0;
 
 	public static final double kAutonomousTime = 15.0;
 	public static final double kTeleoperatedTime = 120.0;
 
-	public static class GearArm {
-		public static final int solenoidA = 0;
-		public static final int solenoidB = 1;
-		public static final int armChannel = 4;
+	public static class Intake {
+		public static final int solenoidLeftForward = 1;
+		public static final int solenoidLeftReverse = 0;
+		public static final int solenoidRightForward = 2;
+		public static final int solenoidRightReverse = 3;
+		public static final int intakeLeft = 1;
+		public static final int intakeRight = 0;
 		public static final double speedUp = -0.15;
 		public static final double speedDown = 0.75;
+	}
+	
+	public static class Conveyor {
+		public static final int conveyorLeft = 7;
+		public static final int conveyorRight = 6;
 	}
 
 	public static class Autonomous {
@@ -83,17 +91,11 @@ public class RobotMap {
 
 	}
 
-	// TODO: encoder channel correction
 	public static class Drive {
-		public static final int leftFront = 0;
-		public static final int leftBack = 2;
-		public static final int rightFront = 1;
-		public static final int rightBack = 3;
-
-		public static final int leftShifterA = 2;
-		public static final int leftShifterB = 3;
-		public static final int rightShifterA = 4;
-		public static final int rightShifterB = 5;
+		public static final int leftFront = 3;
+		public static final int leftBack = 5;
+		public static final int rightFront = 2;
+		public static final int rightBack = 4;
 
 		public static class Slow {
 			public static final double normal = 1.0;
@@ -110,11 +112,8 @@ public class RobotMap {
 	}
 
 	public static class Climb {
-		public static final int climbChannel = 7;
-		public static final int gearArmChannel = 5;
-
-		public static final int climbA = 0;
-		public static final int climbB = 1;
+		public static final int climbLeft = 9;
+		public static final int climbRight = 8;
 
 		public static final double maxForward = 0.65;
 		public static final double maxBackward = -0.4;

@@ -7,20 +7,29 @@
 
 package org.usfirst.frc.team4308.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4308.robot.auto.BlindAuto;
-import org.usfirst.frc.team4308.robot.commands.AbsoluteDrive;
-import org.usfirst.frc.team4308.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4308.robot.auto.CenterAuto;
+import org.usfirst.frc.team4308.robot.auto.LeftAuto;
+import org.usfirst.frc.team4308.robot.auto.Move;
+import org.usfirst.frc.team4308.robot.auto.RightAuto;
+import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.subsystems.Arduino;
+import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4308.robot.subsystems.Flags;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
+import org.usfirst.frc.team4308.robot.subsystems.Intake;
 import org.usfirst.frc.team4308.robot.subsystems.USBVision;
 
 /**
@@ -37,12 +46,19 @@ public class Robot extends TimedRobot {
 	public static USBVision usb;
 	public static Gyroscope navx;
 	public static PowerDistributionPanel pdp;
+	public static Intake intake;
+	public static Conveyor conveyor;
+	public static Compressor c;
+	public static Flags flags;
+	public static Arduino leds;
 
-	public static String gameData;
+	public static String gameData = "";
+	
+//	public static SendableChooser<String> autoChooser;
+	public static Command auto;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> autoChooser = new SendableChooser<>();
-
+	private boolean endgameAlerted = false;
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -50,15 +66,39 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
-		drive = new DriveTrain();
-		usb = new USBVision();		
+		pdp = new PowerDistributionPanel(RobotMap.PDP_ID);
+		LiveWindow.disableAllTelemetry();
+		
+		c = new Compressor(RobotMap.PCM_ID);
+		drive = new DriveTrain();	
+//		usb = new USBVision();
 		navx = new Gyroscope();
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		oi = new OI();
-		autoChooser.addDefault("Default Auto", new ExampleCommand());
-		autoChooser.addObject("Blind Auto", new BlindAuto());
-		SmartDashboard.putData("Auto mode", autoChooser);
+		intake = new Intake();
+		conveyor = new Conveyor();
+		flags = new Flags();
+		leds = new Arduino();
+		
+		auto = null;
+		
+		/*autoChooser = new SendableChooser<String>();
+		autoChooser.addObject("Baseline", "BaselineAuto");
+		autoChooser.addObject("Left", "LeftAuto");
+		autoChooser.addObject("Right", "RightAuto");
+		autoChooser.addObject("Center", "CenterAuto");
+		SmartDashboard.putData("StartingPosition", autoChooser);*/
+		
+		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
+		
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.06)); 
+		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35));
 
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.023)); 
+		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
+		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
+		
+		
 	}
 
 	/**
@@ -68,12 +108,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		Command reset = new ResetSensors();
+		reset.start();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	/**
@@ -90,24 +132,33 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = autoChooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		while (gameData.equals("")) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
 		}
-
+		
+		leds.setState("normal");
 		if (gameData.charAt(0) == 'L') {
-		} else {
-
+			leds.setState("auto left");
 		}
+		else {
+			leds.setState("auto right");
+		}
+		
+		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
+		if(key.startsWith("L")) {
+			auto = new LeftAuto(key.substring(1));
+		} else if (key.startsWith("R")) {
+			auto = new RightAuto(key.substring(1));
+		} else if (key.startsWith("C")){
+			auto = new CenterAuto(key.substring(1));
+		} else {
+			auto = new Move(-148.0);
+		}
+    
+		if (auto != null) {
+			auto.start();
+		}
+		
 	}
 
 	/**
@@ -116,21 +167,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		Logger.log();
 	}
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		// Stops auto when teleop starts
+		if (auto != null) {
+			auto.cancel();
 		}
-
-		
-		new AbsoluteDrive(RobotMap.Control.Standard.leftY, RobotMap.Control.Standard.rightY).start();
-		
 		
 	}
 
@@ -140,16 +185,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY));
-		SmartDashboard.putNumber("Right Y", OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightY));
-
-		SmartDashboard.putNumber("FrontLeftMotor Current", DriveTrain.frontLeft.getOutputCurrent());
-		SmartDashboard.putNumber("FrontRightMotor Current", DriveTrain.frontRight.getOutputCurrent());
-		SmartDashboard.putNumber("RearLeftMotor Current", DriveTrain.rearLeft.getOutputCurrent());
-		SmartDashboard.putNumber("RearRightMotor Current", DriveTrain.rearRight.getOutputCurrent());
+		Logger.log();
 		
-		//SmartDashboard.putNumber("Total Current", pdp.getTotalCurrent());
-		
+		if (!endgameAlerted && Timer.getMatchTime() <= 30) {
+			leds.setState("endgame");
+			endgameAlerted = true;
+		}
 	}
 
 	/**
