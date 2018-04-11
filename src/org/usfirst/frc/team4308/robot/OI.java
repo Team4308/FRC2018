@@ -103,7 +103,8 @@ public class OI {
 			rightX = (rightX*rightX);
 		}
 		
-		return (leftY + rightX);
+		
+		return normalized(leftY + rightX);
 		
 	}
 	
@@ -120,7 +121,7 @@ public class OI {
 			rightX = (rightX*rightX);
 		}
 		
-		return (leftY - rightX);
+		return normalized(leftY - rightX);
 		
 	}
 	
@@ -139,12 +140,12 @@ public class OI {
 
 //		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
-//		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		double leftTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
 		
-		return rightY - leftTrigger;
+		return normalized(rightY + rightX - leftTrigger);
 		
 	}
 	
@@ -152,13 +153,25 @@ public class OI {
 
 //		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
-//		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		double rightTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
 		
-		return rightY - rightTrigger;
+		return normalized(rightY - rightX - rightTrigger);
 		
+	}
+	
+	private static double normalized(double val) {
+		if (val > 1.0) {
+			return 1.0;
+		}
+		else if (val < -1.0) {
+			return -1.0;
+		}
+		else {
+			return val;
+		}
 	}
 	
 	
