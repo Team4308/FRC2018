@@ -110,6 +110,10 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		Command reset = new ResetSensors();
 		reset.start();
+		intake.offIntake();
+		drive.setDrive(0.0, 0.0);
+		intake.moveIntake(0.0, 0.0);
+		conveyor.moveConveyor(0.0);
 	}
 
 	@Override
@@ -176,6 +180,10 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
+		intake.offIntake();
+		drive.setDrive(0.0, 0.0);
+		intake.moveIntake(0.0, 0.0);
+		conveyor.moveConveyor(0.0);
 		
 	}
 

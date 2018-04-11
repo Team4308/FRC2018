@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
 	public WPI_TalonSRX frontLeft;
@@ -20,7 +19,6 @@ public class DriveTrain extends Subsystem {
 	public WPI_TalonSRX rearRight;
 	ArrayList<WPI_TalonSRX> driveMotors = new ArrayList<WPI_TalonSRX>();
 	public SpeedControllerGroup leftDrive,rightDrive;
-	public DifferentialDrive driveHandler;
 	
 	public static double ENCODER_TICKS_TO_INCHES;
 	
@@ -29,7 +27,6 @@ public class DriveTrain extends Subsystem {
 		
 		ENCODER_TICKS_TO_INCHES = Math.PI * 6/4080;
 		
-		// TODO Auto-generated constructor stub
 		frontLeft = new WPI_TalonSRX(RobotMap.Drive.leftFront);
 		driveMotors.add(frontLeft);
 		frontRight = new WPI_TalonSRX(RobotMap.Drive.rightFront);
