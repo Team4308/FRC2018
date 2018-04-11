@@ -74,7 +74,7 @@ public class OI {
 		A2.whenPressed(new SetRobotState("cube drop"));
 		B2.whileHeld(new SetFlag(0, false, -1));
 		X2.whileHeld(new SetFlag(0, true, -1));
-		Y2.whileHeld(new SetRobotState("rave"));
+		Y2.whenPressed(new SetRobotState("rave"));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());
@@ -97,7 +97,14 @@ public class OI {
 		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-		return (leftY + rightX);
+		if (rightX <= 0) {
+			rightX = -(rightX*rightX);
+		} else {
+			rightX = (rightX*rightX);
+		}
+		
+		
+		return normalized(leftY + rightX);
 		
 	}
 	
@@ -108,7 +115,13 @@ public class OI {
 		double rightX = driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
 //		double rightY = -driveStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
-		return (leftY - rightX);
+		if (rightX <= 0) {
+			rightX = -(rightX*rightX);
+		} else {
+			rightX = (rightX*rightX);
+		}
+		
+		return normalized(leftY - rightX);
 		
 	}
 	
@@ -127,12 +140,12 @@ public class OI {
 
 //		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
-//		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		double leftTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.leftTrigger);
 		
-		return rightY - leftTrigger;
+		return normalized(rightY + rightX - leftTrigger);
 		
 	}
 	
@@ -140,13 +153,25 @@ public class OI {
 
 //		double leftX = controlStick.getRawAxis(RobotMap.Control.Standard.leftX);
 //		double leftY = -controlStick.getRawAxis(RobotMap.Control.Standard.leftY);
-//		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
+		double rightX = controlStick.getRawAxis(RobotMap.Control.Standard.rightX);
 		double rightY = -controlStick.getRawAxis(RobotMap.Control.Standard.rightY);
 		
 		double rightTrigger = controlStick.getRawAxis(RobotMap.Control.Standard.rightTrigger);
 		
-		return rightY - rightTrigger;
+		return normalized(rightY - rightX - rightTrigger);
 		
+	}
+	
+	private static double normalized(double val) {
+		if (val > 1.0) {
+			return 1.0;
+		}
+		else if (val < -1.0) {
+			return -1.0;
+		}
+		else {
+			return val;
+		}
 	}
 	
 	
