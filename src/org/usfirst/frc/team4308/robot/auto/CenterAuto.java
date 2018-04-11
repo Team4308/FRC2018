@@ -34,7 +34,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new PullConveyor(false), 2.5);
 			
 			// Reset to center
-			if (key.contains("R")) {
+			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(-90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
@@ -81,7 +81,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new PullConveyor(false), 2.5);
 			
 			// Reset to center
-			if (key.contains("R")) {
+			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
