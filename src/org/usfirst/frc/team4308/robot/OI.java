@@ -74,7 +74,7 @@ public class OI {
 		A2.whenPressed(new SetRobotState("cube drop"));
 		B2.whileHeld(new SetFlag(0, false, -1));
 		X2.whileHeld(new SetFlag(0, true, -1));
-		Y2.whileHeld(new SetRobotState("rave"));
+		Y2.whenPressed(new SetRobotState("rave"));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());
