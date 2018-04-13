@@ -65,7 +65,7 @@ public class Move extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(2.0) || isTimedOut();
+		return pid.onTarget(2.5) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

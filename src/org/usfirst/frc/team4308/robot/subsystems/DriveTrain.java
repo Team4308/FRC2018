@@ -38,8 +38,8 @@ public class DriveTrain extends Subsystem {
 		
 		for(WPI_TalonSRX talon : driveMotors) {
 			talon.configOpenloopRamp(0, 0);
-			talon.configContinuousCurrentLimit(10, 0);
-			talon.configPeakCurrentLimit(15, 0);
+			talon.configContinuousCurrentLimit(35, 0); // 10
+			talon.configPeakCurrentLimit(35, 0);  // 15
 			talon.configPeakCurrentDuration(100, 0);
 			talon.enableCurrentLimit(true);
 		}

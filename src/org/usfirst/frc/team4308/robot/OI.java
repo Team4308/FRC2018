@@ -56,7 +56,7 @@ public class OI {
 //		B1.whileHeld(new PullConveyor(true));
 //		X1.whileHeld(new PullConveyor(false));
 		
-		X1.whenPressed(new Rotate(90));
+		X1.whenPressed(new Rotate(135));
 		Y1.whenPressed(new Move(60));
 		
 
