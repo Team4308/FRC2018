@@ -17,22 +17,21 @@ public class CenterAuto extends CommandGroup {
 		// Left side is our alliance switch
 		if (Robot.gameData.charAt(0) == 'L') {
 			
-			// New auto
-//			addSequential(new Move(-11.0));
-//			addSequential(new Rotate(-34.0));
-//			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
-//			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
-			
-			// McMaster tested auto
+			// Ontario CMP Auto
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
-			
-			addSequential(new Move(-20.0)); // Move 20" forward (overshooting 17.75")
-//			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
-			
+			addSequential(new Move(-19.0)); // Move 19" forward (overshooting 17.75")			
 			addSequential(new PullConveyor(false), 1.0);
+			
+			// McMaster tested auto
+//			addSequential(new Move(-20.0)); // Move 20" forward
+//			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
+//			addSequential(new Move(-88.0)); // Move 62.25" left and forward
+//			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
+//			addSequential(new Move(-20.0)); // Move 20" forward (overshooting 17.75")			
+//			addSequential(new PullConveyor(false), 1.0);
 			
 			// Ryerson tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -43,53 +42,55 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new PullConveyor(false), 2.5);
 			
 			// Reset to center
-			if (key.contains("R")) {
+			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(-90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
-				addSequential(new Move(54.5)); // 56.5
+				addSequential(new Move(56.5)); // 56.5
 				addSequential(new Rotate(-90.0));
 			}
 			// Get another cube
 			else if (key.contains("2")) {
-				addSequential(new Move(60.0));
-				addSequential(new Rotate(-90.0)); 
-				addParallel(new IntakeToggle(ToggleType.OPEN));
-				addSequential(new Move(54.5)); // 56.5
-				addSequential(new Rotate(-90.0));
-				addParallel(new MoveIntake(1.0, 1.0, 1.5));
-				addSequential(new Move(35.0));
 				
-				if (key.contains("S")) {
-					addSequential(new IntakeToggle(ToggleType.CLOSE));
-					addSequential(new Move(10.0));
-					addSequential(new Rotate(-90.0));
-					addSequential(new Move(56.5));
-					addSequential(new Rotate(-90.0));
-
-					addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
-					addSequential(new PullConveyor(false), 1.0);
+				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(83.0)); // 63 + 20 for robot size
+				addSequential(new Rotate(-135.0));
+				addParallel(new MoveIntake(-1.0, -1.0, 2.5));
+				addSequential(new Move(66.0)); // 64 + 2 for a little more
+				
+				if (key.contains("V")) {
+					
+//					addParallel(new IntakeToggle(ToggleType.CLOSE));
+					addParallel(new MoveIntake(-1.0, -1.0, 5.0));
+					addSequential(new Move(-34.0)); // 32 + 2 since a little more
+					addSequential(new Rotate(135.0));
+					addSequential(new Move(32.0)); // 78 - 20 - 6 for intake size - 20 for adjust
+					addParallel(new PullConveyor(true), 2.0);
+					addSequential(new MoveIntake(1.0, 1.0, 2.0));
+					
 				}
+				
 			}
 			
 		} 
 		// Right side is our alliance switch
 		else {
-			
-			//New auto
-//			addSequential(new Move(-11.0));
-//			addSequential(new Rotate(29.0));
-//			addParallel(new DelayedCommand(new PullConveyor(false), 2.5), 0.5); // Move conveyor while moving, but a bit delayed
-//			addSequential(new TimedMove(1.5, -1.0)); // For generous overshooting
-			
-			// McMaster tested auto
+
+			// Ontario CMP
 			addSequential(new Move(-20.0)); // Move 20" forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
-			addSequential(new Move(-32.0)); // Move 32" forward (overshooting 29.25")
-//			addSequential(new TimedMove(0.7, -1.0)); // Move forward and overshoot
+			addSequential(new Move(-31.0)); // Move 31" forward (overshooting 29.25")
 			addSequential(new PullConveyor(false), 1.0);
+			
+			// McMaster tested auto
+//			addSequential(new Move(-20.0)); // Move 20" forward
+//			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
+//			addSequential(new Move(-72.0)); // Move 50.75" left and forward
+//			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
+//			addSequential(new Move(-32.0)); // Move 32" forward (overshooting 29.25")
+//			addSequential(new PullConveyor(false), 1.0);
 						
 			// Ryerson tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -100,7 +101,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new PullConveyor(false), 2.5);
 			
 			// Reset to center
-			if (key.contains("R")) {
+			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(90.0)); 
 				addParallel(new IntakeToggle(ToggleType.OPEN));
@@ -109,37 +110,28 @@ public class CenterAuto extends CommandGroup {
 			}
 			// Get another cube
 			else if (key.contains("2")) {
-				addSequential(new Move(60.0));
-				addSequential(new Rotate(90.0)); 
-				addParallel(new IntakeToggle(ToggleType.OPEN));
-				addSequential(new Move(56.5)); // 56.5
-				addSequential(new Rotate(90.0));
-				addParallel(new MoveIntake(1.0, 1.0, 1.5));
-				addSequential(new Move(20.0));
 				
-				if (key.contains("S")) {
-					addSequential(new IntakeToggle(ToggleType.CLOSE));
-					addSequential(new Move(10.0));
-					addSequential(new Rotate(90.0));
-					addSequential(new Move(56.5));
-					addSequential(new Rotate(90.0));
-
-					addSequential(new TimedMove(0.5, -1.0)); // For generous overshooting
-					addSequential(new PullConveyor(false), 1.0);
+				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addSequential(new Move(83.0)); // 63 + 20
+				addSequential(new Rotate(135.0));
+				addParallel(new MoveIntake(-1.0, -1.0, 2.5));
+				addSequential(new Move(64.0));
+				
+				if (key.contains("V")) {
+					
+//					addParallel(new IntakeToggle(ToggleType.CLOSE));
+					addParallel(new MoveIntake(-1.0, -1.0, 5.0));
+					addSequential(new Rotate(-45)); // Rotate immediately
+					addSequential(new Move(48.0)); // Move across
+					addSequential(new Rotate(-90.0));
+					addSequential(new Move(42.0)); // 88 - 20 - 6 for intake size - 20 for adjust
+					addParallel(new PullConveyor(true), 2.0);
+					addSequential(new MoveIntake(1.0, 1.0, 2.0));
+					
 				}
+				
 			}
 		}
 		
-		// Got another cube, now vault
-		if (key.contains("2") && key.contains("V")) {
-			addSequential(new IntakeToggle(ToggleType.CLOSE));
-			addSequential(new Move(-25.0));
-			addSequential(new Rotate(-90.0));
-			addSequential(new Move(25.0));
-			addSequential(new Rotate(-90.0));
-			addParallel(new IntakeToggle(ToggleType.OPEN));
-			addSequential(new Move(-25.0));
-			addSequential(new MoveIntake(-1.0, -1.0, 2.0));
-		}
 	}
 }

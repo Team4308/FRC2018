@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 		
 		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
-//		usb = new USBVision();
+		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
@@ -88,13 +88,13 @@ public class Robot extends TimedRobot {
 		autoChooser.addObject("Center", "CenterAuto");
 		SmartDashboard.putData("StartingPosition", autoChooser);*/
 		
-		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B)","B"));
+		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B):","B"));
 		
-		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.06)); 
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.07));  // 0.06
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35));
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35
 
-		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.023)); 
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.03));  // 0.023
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
 		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
 		
@@ -110,6 +110,10 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		Command reset = new ResetSensors();
 		reset.start();
+		intake.offIntake();
+		drive.setDrive(0.0, 0.0);
+		intake.moveIntake(0.0, 0.0);
+		conveyor.moveConveyor(0.0);
 	}
 
 	@Override
@@ -176,6 +180,10 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
+		intake.offIntake();
+		drive.setDrive(0.0, 0.0);
+		intake.moveIntake(0.0, 0.0);
+		conveyor.moveConveyor(0.0);
 		
 	}
 

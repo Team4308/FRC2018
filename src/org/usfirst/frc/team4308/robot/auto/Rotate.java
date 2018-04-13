@@ -29,7 +29,7 @@ public class Rotate extends Command {
     		rotation = angle;
 	    	
 		requires(Robot.drive);
-		setTimeout(0.7);
+		setTimeout(1.5);
 	}
 
 	// Called just before this Command runs the first time
@@ -60,7 +60,7 @@ public class Rotate extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return pid.onTarget(0.5) || isTimedOut();
+		return pid.onTarget(0.1) || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

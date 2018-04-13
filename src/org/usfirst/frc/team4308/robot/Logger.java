@@ -21,9 +21,9 @@ public class Logger {
 		SmartDashboard.putNumber("RightX", rightX);
 		SmartDashboard.putNumber("RightY", rightY);
 		
-//		SmartDashboard.putNumber("LeftEncoderPosition", Robot.drive.getLeftSensorPosition());
+		SmartDashboard.putNumber("LeftEncoderPosition", Robot.drive.getLeftSensorPosition());
 //		SmartDashboard.putNumber("LeftEncoderVelocity", Robot.drive.frontLeft.getSelectedSensorVelocity(0));
-//		SmartDashboard.putNumber("RightEncoderPosition", Robot.drive.getRightSensorPosition());
+		SmartDashboard.putNumber("RightEncoderPosition", Robot.drive.getRightSensorPosition());
 //		SmartDashboard.putNumber("RightEncoderVelocity", Robot.drive.frontRight.getSelectedSensorVelocity(0));
 		
 		SmartDashboard.putNumber("GyroAngle", Robot.navx.gyro.getAngle());
