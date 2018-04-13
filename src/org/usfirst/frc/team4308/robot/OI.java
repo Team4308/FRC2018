@@ -10,12 +10,10 @@ package org.usfirst.frc.team4308.robot;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.commands.SetFlag;
 import org.usfirst.frc.team4308.robot.commands.SetRobotState;
-import org.usfirst.frc.team4308.robot.commands.SwitchCompressor;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
 import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
-import org.usfirst.frc.team4308.robot.commands.PullConveyor;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -34,8 +32,8 @@ public class OI {
 	private JoystickButton X1 = new JoystickButton(driveStick, RobotMap.Control.Standard.x);
 	private JoystickButton Y1 = new JoystickButton(driveStick, RobotMap.Control.Standard.y);
 	
-	private JoystickButton LB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.leftBumper);
-	private JoystickButton RB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.rightBumper);
+//	private JoystickButton LB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.leftBumper);
+//	private JoystickButton RB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.rightBumper);
 
 	private JoystickButton Start1 = new JoystickButton(driveStick, RobotMap.Control.Standard.start);
 	
@@ -51,22 +49,11 @@ public class OI {
 	
 	public OI() {
 		
-		// Single controller controls
-		A1.whenPressed(new SwitchCompressor());
-//		B1.whileHeld(new PullConveyor(true));
-//		X1.whileHeld(new PullConveyor(false));
-		
 		X1.whenPressed(new Rotate(135));
 		Y1.whenPressed(new Move(60));
+		A1.whenPressed(new Rotate(45));
+		B1.whenPressed(new Move(10));
 		
-
-//		LB1.whenPressed(new IntakeToggle(ToggleType.CLOSE));
-//		RB1.whenPressed(new IntakeToggle(ToggleType.OPEN));
-		
-//		A1.whenPressed(new IntakeToggle(ToggleType.SWITCH));
-//		B1.whenPressed(new IntakeToggle(ToggleType.OFF));
-		
-		// Dual controller controls
 		
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));

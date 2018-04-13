@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4308.robot.auto.CenterAuto;
@@ -54,7 +53,6 @@ public class Robot extends TimedRobot {
 
 	public static String gameData = "";
 	
-//	public static SendableChooser<String> autoChooser;
 	public static Command auto;
 
 	private boolean endgameAlerted = false;
@@ -71,7 +69,7 @@ public class Robot extends TimedRobot {
 		
 		c = new Compressor(RobotMap.PCM_ID);
 		drive = new DriveTrain();	
-		usb = new USBVision();
+//		usb = new USBVision();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
