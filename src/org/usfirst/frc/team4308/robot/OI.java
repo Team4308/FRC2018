@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.commands.SetCurrentLimiting;
 import org.usfirst.frc.team4308.robot.commands.SetFlag;
 import org.usfirst.frc.team4308.robot.commands.SetRobotState;
 import org.usfirst.frc.team4308.robot.auto.Move;
@@ -32,8 +33,8 @@ public class OI {
 	private JoystickButton X1 = new JoystickButton(driveStick, RobotMap.Control.Standard.x);
 	private JoystickButton Y1 = new JoystickButton(driveStick, RobotMap.Control.Standard.y);
 	
-//	private JoystickButton LB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.leftBumper);
-//	private JoystickButton RB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.rightBumper);
+	private JoystickButton LB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.leftBumper);
+	private JoystickButton RB1 = new JoystickButton(driveStick, RobotMap.Control.Standard.rightBumper);
 
 	private JoystickButton Start1 = new JoystickButton(driveStick, RobotMap.Control.Standard.start);
 	
@@ -54,6 +55,9 @@ public class OI {
 		A1.whenPressed(new Rotate(45));
 		B1.whenPressed(new Move(10));
 		
+		LB1.whenPressed(new SetCurrentLimiting());
+		RB1.whenPressed(new SetCurrentLimiting());
+
 		
 		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
 		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));

@@ -97,6 +97,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
 		
 		
+		SmartDashboard.putBoolean("CurrentLimiting", SmartDashboard.getBoolean("CurrentLimiting", true));
+		SmartDashboard.putNumber("ContinuousCurrent", SmartDashboard.getNumber("ContinuousCurrent", 35));
+		SmartDashboard.putNumber("PeakCurrent", SmartDashboard.getNumber("PeakCurrent", 35));
+		SmartDashboard.putNumber("CurrentRamping", SmartDashboard.getNumber("CurrentRamping", 0));
+		SmartDashboard.putNumber("PeakDuration", SmartDashboard.getNumber("PeakDuration", 100));
+		
+		
 	}
 
 	/**

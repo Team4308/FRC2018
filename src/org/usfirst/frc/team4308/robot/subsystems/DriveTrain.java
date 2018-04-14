@@ -53,6 +53,16 @@ public class DriveTrain extends Subsystem {
 		rightDrive = new SpeedControllerGroup(frontRight,rearRight);
 		rightDrive.setInverted(true);
 	}
+	
+	public void setCurrentLimit(boolean limit, double ramp, int continuous, int peak, int peakDuration) { 
+		for(WPI_TalonSRX talon : driveMotors) {
+			talon.configOpenloopRamp(ramp, 0);
+			talon.configContinuousCurrentLimit(continuous, 0); // 10
+			talon.configPeakCurrentLimit(peak, 0);  // 15
+			talon.configPeakCurrentDuration(peakDuration, 0);
+			talon.enableCurrentLimit(limit);
+		}
+	}
 
 	@Override
 	protected void initDefaultCommand() {
