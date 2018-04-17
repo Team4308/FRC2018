@@ -17,7 +17,6 @@ public class SetConveyorSpeedLimit extends Command {
 		super.execute();
 		
 		Robot.conveyor.speedLimit = limit;
-		
 	}
 
 	@Override

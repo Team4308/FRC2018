@@ -35,7 +35,7 @@ public class Rotate extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		double Kp = SmartDashboard.getNumber("RotateP", 0.08); 
+		double Kp = SmartDashboard.getNumber("RotateP", 0.07); 
 		double Ki = SmartDashboard.getNumber("RotateI", 0.0);
 		double Kd = SmartDashboard.getNumber("RotateD", 0.35);
 		

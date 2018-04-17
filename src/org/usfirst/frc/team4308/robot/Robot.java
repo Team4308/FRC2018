@@ -24,7 +24,7 @@ import org.usfirst.frc.team4308.robot.auto.RightAuto;
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Arduino;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
-import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4308.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4308.robot.subsystems.Flags;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team4308.robot.subsystems.Intake;
@@ -40,7 +40,7 @@ import org.usfirst.frc.team4308.robot.subsystems.USBVision;
 public class Robot extends TimedRobot {
 	
 	public static OI oi;
-	public static DriveTrain drive;
+	public static Drivetrain drive;
 	public static USBVision usb;
 	public static Gyroscope navx;
 	public static PowerDistributionPanel pdp;
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 		LiveWindow.disableAllTelemetry();
 		
 		c = new Compressor(RobotMap.PCM_ID);
-		drive = new DriveTrain();
+		drive = new Drivetrain();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
@@ -83,7 +83,11 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.07));  // 0.06
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35, 0.5 works better for longer
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35
+		
+		SmartDashboard.putNumber("RotateLongP", SmartDashboard.getNumber("RotateLongP", 0.07));  // 0.06
+		SmartDashboard.putNumber("RotateLongI", SmartDashboard.getNumber("RotateLongI", 0.0));
+		SmartDashboard.putNumber("RotateLongD", SmartDashboard.getNumber("RotateLongD", 0.5));
 
 		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.03));  // 0.023
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));

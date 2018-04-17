@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
 	public WPI_TalonSRX frontLeft;
 	public WPI_TalonSRX frontRight;
 	public WPI_TalonSRX rearLeft;
@@ -23,7 +23,7 @@ public class DriveTrain extends Subsystem {
 	public static double ENCODER_TICKS_TO_INCHES;
 	
 	
-	public DriveTrain() {
+	public Drivetrain() {
 		
 		ENCODER_TICKS_TO_INCHES = Math.PI * 6/4080;
 		
