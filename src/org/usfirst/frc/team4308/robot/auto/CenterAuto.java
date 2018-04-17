@@ -23,7 +23,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
 			addSequential(new Move(-19.0)); // Move 19" forward (overshooting 17.75")			
-			addSequential(new MoveConveyor(false), 1.0);
+			addSequential(new MoveConveyor(1.0), 1.0);
 			
 			// McMaster tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -56,19 +56,19 @@ public class CenterAuto extends CommandGroup {
 				addSequential(new Move(73.0)); // 63 + 20 for robot size - 10 for adjust
 				addSequential(new Rotate(-135.0));
 				addParallel(new Move(66.0)); // 64 + 2 for a little more
-				addSequential(new MoveIntake(-1.0, -1.0, 3.0));
+				addSequential(new MoveIntake(-1.0, -1.0), 3.0);
 				
 				if (key.contains("V")) {
 					
 //					addParallel(new IntakeToggle(ToggleType.CLOSE));
-					addParallel(new MoveIntake(-1.0, -1.0, 5.0));
+					addParallel(new MoveIntake(-1.0, -1.0), 5.0);
 					addSequential(new Move(-34.0)); // 32 + 2 since a little more
 					addSequential(new Rotate(135.0));
 					addSequential(new Move(42.0)); // 78 - 20 - 6 for intake size - 20 for adjust
 					
 					if (key.contains("A")) {
-						addParallel(new MoveConveyor(true), 2.0);
-						addSequential(new MoveIntake(1.0, 1.0, 2.0));
+						addParallel(new MoveConveyor(-1.0), 2.0);
+						addSequential(new MoveIntake(1.0, 1.0), 2.0);
 					}
 					
 				}
@@ -85,7 +85,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
 			addSequential(new Move(-31.0)); // Move 31" forward (overshooting 29.25")
-			addSequential(new MoveConveyor(false), 1.0);
+			addSequential(new MoveConveyor(1.0), 1.0);
 			
 			// McMaster tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -118,21 +118,21 @@ public class CenterAuto extends CommandGroup {
 				addSequential(new Move(73.0)); // 63 + 20
 				addSequential(new Rotate(135.0));
 				addParallel(new Move(64.0));
-				addSequential(new MoveIntake(-1.0, -1.0, 3.0));
+				addSequential(new MoveIntake(-1.0, -1.0), 3.0);
 
 				
 				if (key.contains("V")) {
 					
 //					addParallel(new IntakeToggle(ToggleType.CLOSE));
-					addParallel(new MoveIntake(-1.0, -1.0, 5.0));
+					addParallel(new MoveIntake(-1.0, -1.0), 5.0);
 					addSequential(new Rotate(-45)); // Rotate immediately
 					addSequential(new Move(48.0)); // Move across
 					addSequential(new Rotate(-90.0));
 					addSequential(new Move(62.0)); // 88 - 20 - 6 for intake size
 					
 					if (key.contains("A")) {
-						addParallel(new MoveConveyor(true), 2.0);
-						addSequential(new MoveIntake(1.0, 1.0, 2.0));
+						addParallel(new MoveConveyor(-1.0), 2.0);
+						addSequential(new MoveIntake(1.0, 1.0), 2.0);
 					}
 					
 				}

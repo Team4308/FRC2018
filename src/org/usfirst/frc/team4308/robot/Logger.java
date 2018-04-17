@@ -9,8 +9,6 @@ public class Logger {
 
 		SmartDashboard.putNumber("Match Time", Timer.getMatchTime());
 		
-//		SmartDashboard.getString("Position (B,L,R,C): ", "");
-		
 		double leftX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftX);
 		double leftY = -OI.driveStick.getRawAxis(RobotMap.Control.Standard.leftY);
 		double rightX = OI.driveStick.getRawAxis(RobotMap.Control.Standard.rightX);
@@ -31,20 +29,18 @@ public class Logger {
 //		SmartDashboard.putNumber("GyroDisplacement Y", Robot.navx.gyro.getDisplacementY());
 //		SmartDashboard.putNumber("GyroDisplacement Z", Robot.navx.gyro.getDisplacementZ());
 
-//		SmartDashboard.putNumber("FrontLeftMotorCurrent", Robot.drive.frontLeft.getOutputCurrent());
-//		SmartDashboard.putNumber("FrontRightMotorCurrent", Robot.drive.frontRight.getOutputCurrent());
-//		SmartDashboard.putNumber("RearLeftMotorCurrent", Robot.drive.rearLeft.getOutputCurrent());
-//		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
+		SmartDashboard.putNumber("FrontLeftMotorCurrent", Robot.drive.frontLeft.getOutputCurrent());
+		SmartDashboard.putNumber("FrontRightMotorCurrent", Robot.drive.frontRight.getOutputCurrent());
+		SmartDashboard.putNumber("RearLeftMotorCurrent", Robot.drive.rearLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RearRightMotorCurrent", Robot.drive.rearRight.getOutputCurrent());
 		
-//		SmartDashboard.putNumber("LeftConveyorCurrent", Robot.conveyor.conveyorLeft.getOutputCurrent());
-//		SmartDashboard.putNumber("RightConveyorCurrent", Robot.conveyor.conveyorRight.getOutputCurrent());
-//		
-//		SmartDashboard.putNumber("LeftIntakeCurrent", Robot.intake.intakeLeft.getOutputCurrent());
-//		SmartDashboard.putNumber("RightIntakeCurrent", Robot.intake.intakeRight.getOutputCurrent());
+		SmartDashboard.putNumber("LeftConveyorCurrent", Robot.conveyor.conveyorLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightConveyorCurrent", Robot.conveyor.conveyorRight.getOutputCurrent());
 		
-//		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
+		SmartDashboard.putNumber("LeftIntakeCurrent", Robot.intake.intakeLeft.getOutputCurrent());
+		SmartDashboard.putNumber("RightIntakeCurrent", Robot.intake.intakeRight.getOutputCurrent());
 		
-//		SmartDashboard.putNumber("Intake State", Robot.intake.state == IntakeState.OPEN ? 1 : 0);
+		SmartDashboard.putNumber("TotalCurrent", Robot.pdp.getTotalCurrent());
 		
 	}
 	

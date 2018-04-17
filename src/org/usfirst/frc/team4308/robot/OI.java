@@ -74,6 +74,10 @@ public class OI {
 		
 	}
 	
+	// STICK CONTROLS
+	// X -> RIGHT is POSITIVE, LEFT is NEGATIVE
+	// Y -> UP is POSITIVE, DOWN is NEGATIVE (this includes the negative sign)
+	
 	// Tank Drive
 //	(leftY, rightY); 
 	

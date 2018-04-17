@@ -67,29 +67,23 @@ public class Robot extends TimedRobot {
 		LiveWindow.disableAllTelemetry();
 		
 		c = new Compressor(RobotMap.PCM_ID);
-		drive = new DriveTrain();	
-//		usb = new USBVision();
+		drive = new DriveTrain();
 		navx = new Gyroscope();
 		oi = new OI();
 		intake = new Intake();
 		conveyor = new Conveyor();
 		flags = new Flags();
-		leds = new Arduino();
+		leds = new Arduino();	
+//		usb = new USBVision();
 		
 		auto = null;
 		
-		/*autoChooser = new SendableChooser<String>();
-		autoChooser.addObject("Baseline", "BaselineAuto");
-		autoChooser.addObject("Left", "LeftAuto");
-		autoChooser.addObject("Right", "RightAuto");
-		autoChooser.addObject("Center", "CenterAuto");
-		SmartDashboard.putData("StartingPosition", autoChooser);*/
 		
-		SmartDashboard.putString("Position(L,C,R,B):", SmartDashboard.getString("Position(L,C,R,B):","B"));
+		SmartDashboard.putString("Choose Auto", SmartDashboard.getString("Choose Auto", "B"));
 		
 		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.07));  // 0.06
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
-		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35
+		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35, 0.5 works better for longer
 
 		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.03));  // 0.023
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
@@ -97,8 +91,8 @@ public class Robot extends TimedRobot {
 		
 		
 		SmartDashboard.putBoolean("CurrentLimiting", SmartDashboard.getBoolean("CurrentLimiting", true));
-		SmartDashboard.putNumber("ContinuousCurrent", SmartDashboard.getNumber("ContinuousCurrent", 35));
-		SmartDashboard.putNumber("PeakCurrent", SmartDashboard.getNumber("PeakCurrent", 35));
+		SmartDashboard.putNumber("ContinuousCurrent", SmartDashboard.getNumber("ContinuousCurrent", 10));
+		SmartDashboard.putNumber("PeakCurrent", SmartDashboard.getNumber("PeakCurrent", 15));
 		SmartDashboard.putNumber("CurrentRamping", SmartDashboard.getNumber("CurrentRamping", 0));
 		SmartDashboard.putNumber("PeakDuration", SmartDashboard.getNumber("PeakDuration", 100));
 		
@@ -126,18 +120,6 @@ public class Robot extends TimedRobot {
 		Logger.log();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable chooser
-	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-	 * remove all of the chooser code and uncomment the getString code to get the
-	 * auto name from the text box below the Gyro
-	 *
-	 * <p>
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons to
-	 * the switch structure below with additional strings & commands.
-	 */
 	@Override
 	public void autonomousInit() {
 		while (gameData.equals("")) {
@@ -185,7 +167,6 @@ public class Robot extends TimedRobot {
 			auto.cancel();
 		}
 		
-		intake.offIntake();
 		drive.setDrive(0.0, 0.0);
 		intake.moveIntake(0.0, 0.0);
 		conveyor.moveConveyor(0.0);

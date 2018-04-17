@@ -6,21 +6,17 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveConveyor extends Command {
 
-	private boolean reversed;
+	private double speed;
 
-	public MoveConveyor(boolean reverse) {
-		reversed = reverse;
+	public MoveConveyor(double speed) {
+		this.speed = speed;
 	}
 
 	@Override
 	protected void execute() {
 		super.execute();
-
-		if (!reversed) {
-			Robot.conveyor.moveConveyor(1);
-		} else {
-			Robot.conveyor.moveConveyor(-1);
-		}
+		
+		Robot.conveyor.moveConveyor(speed); // 1 is up, -1 is down
 	}
 
 	@Override
