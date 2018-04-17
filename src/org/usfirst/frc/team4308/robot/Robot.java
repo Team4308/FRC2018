@@ -25,7 +25,6 @@ import org.usfirst.frc.team4308.robot.commands.ResetSensors;
 import org.usfirst.frc.team4308.robot.subsystems.Arduino;
 import org.usfirst.frc.team4308.robot.subsystems.Conveyor;
 import org.usfirst.frc.team4308.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4308.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4308.robot.subsystems.Flags;
 import org.usfirst.frc.team4308.robot.subsystems.Gyroscope;
 import org.usfirst.frc.team4308.robot.subsystems.Intake;
@@ -39,7 +38,7 @@ import org.usfirst.frc.team4308.robot.subsystems.USBVision;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
+	
 	public static OI oi;
 	public static DriveTrain drive;
 	public static USBVision usb;
@@ -185,6 +184,7 @@ public class Robot extends TimedRobot {
 		if (auto != null) {
 			auto.cancel();
 		}
+		
 		intake.offIntake();
 		drive.setDrive(0.0, 0.0);
 		intake.moveIntake(0.0, 0.0);

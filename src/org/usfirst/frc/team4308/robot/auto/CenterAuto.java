@@ -1,10 +1,10 @@
 package org.usfirst.frc.team4308.robot.auto;
 
 import org.usfirst.frc.team4308.robot.Robot;
-import org.usfirst.frc.team4308.robot.commands.PullConveyor;
-import org.usfirst.frc.team4308.robot.commands.SetFlag;
-import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
-import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
+import org.usfirst.frc.team4308.robot.commands.MoveConveyor;
+import org.usfirst.frc.team4308.robot.commands.MoveFlag;
+import org.usfirst.frc.team4308.robot.commands.ToggleIntake;
+import org.usfirst.frc.team4308.robot.commands.ToggleIntake.ToggleType;
 import org.usfirst.frc.team4308.robot.commands.MoveIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterAuto extends CommandGroup {
 	public CenterAuto(String key){
 		
-		addParallel(new SetFlag(0, false, 1.3));
+		addParallel(new MoveFlag(0, false, 1.3));
 		
 		// Left side is our alliance switch
 		if (Robot.gameData.charAt(0) == 'L') {
@@ -23,7 +23,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
 			addSequential(new Move(-19.0)); // Move 19" forward (overshooting 17.75")			
-			addSequential(new PullConveyor(false), 1.0);
+			addSequential(new MoveConveyor(false), 1.0);
 			
 			// McMaster tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -45,14 +45,14 @@ public class CenterAuto extends CommandGroup {
 			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(-90.0)); 
-				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(56.5)); // 56.5
 				addSequential(new Rotate(-90.0));
 			}
 			// Get another cube
 			else if (key.contains("2")) {
 				
-				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(73.0)); // 63 + 20 for robot size - 10 for adjust
 				addSequential(new Rotate(-135.0));
 				addParallel(new Move(66.0)); // 64 + 2 for a little more
@@ -67,7 +67,7 @@ public class CenterAuto extends CommandGroup {
 					addSequential(new Move(42.0)); // 78 - 20 - 6 for intake size - 20 for adjust
 					
 					if (key.contains("A")) {
-						addParallel(new PullConveyor(true), 2.0);
+						addParallel(new MoveConveyor(true), 2.0);
 						addSequential(new MoveIntake(1.0, 1.0, 2.0));
 					}
 					
@@ -85,7 +85,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
 			addSequential(new Move(-31.0)); // Move 31" forward (overshooting 29.25")
-			addSequential(new PullConveyor(false), 1.0);
+			addSequential(new MoveConveyor(false), 1.0);
 			
 			// McMaster tested auto
 //			addSequential(new Move(-20.0)); // Move 20" forward
@@ -107,14 +107,14 @@ public class CenterAuto extends CommandGroup {
 			if (key.contains("M")) {
 				addSequential(new Move(60.0));
 				addSequential(new Rotate(90.0)); 
-				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(56.5)); // 56.5
 				addSequential(new Rotate(90.0));
 			}
 			// Get another cube
 			else if (key.contains("2")) {
 				
-				addParallel(new IntakeToggle(ToggleType.OPEN));
+				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(73.0)); // 63 + 20
 				addSequential(new Rotate(135.0));
 				addParallel(new Move(64.0));
@@ -131,7 +131,7 @@ public class CenterAuto extends CommandGroup {
 					addSequential(new Move(62.0)); // 88 - 20 - 6 for intake size
 					
 					if (key.contains("A")) {
-						addParallel(new PullConveyor(true), 2.0);
+						addParallel(new MoveConveyor(true), 2.0);
 						addSequential(new MoveIntake(1.0, 1.0, 2.0));
 					}
 					

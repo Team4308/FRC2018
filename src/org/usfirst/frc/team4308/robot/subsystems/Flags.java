@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4308.robot.subsystems;
 
-import org.usfirst.frc.team4308.robot.commands.AbsoluteFlags;
-
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,15 +16,6 @@ public class Flags extends Subsystem {
 		talons[0] = new Talon(0);
 //		talons[1] = new Talon(1);
 	
-	}
-	
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new AbsoluteFlags());
-	}
-	
-	public void flagControl() {
-
 	}
 	
 	public void stopFlags() {
@@ -53,6 +42,11 @@ public class Flags extends Subsystem {
 			return;
 		}
 		talons[channel].set(down);
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		
 	}
 
 }

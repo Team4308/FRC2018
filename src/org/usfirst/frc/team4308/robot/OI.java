@@ -8,13 +8,14 @@
 package org.usfirst.frc.team4308.robot;
 
 import org.usfirst.frc.team4308.robot.commands.ResetSensors;
+import org.usfirst.frc.team4308.robot.commands.SetConveyorSpeedLimit;
 import org.usfirst.frc.team4308.robot.commands.SetCurrentLimiting;
-import org.usfirst.frc.team4308.robot.commands.SetFlag;
+import org.usfirst.frc.team4308.robot.commands.MoveFlag;
 import org.usfirst.frc.team4308.robot.commands.SetRobotState;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
-import org.usfirst.frc.team4308.robot.commands.IntakeToggle;
-import org.usfirst.frc.team4308.robot.commands.IntakeToggle.ToggleType;
+import org.usfirst.frc.team4308.robot.commands.ToggleIntake;
+import org.usfirst.frc.team4308.robot.commands.ToggleIntake.ToggleType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -50,22 +51,23 @@ public class OI {
 	
 	public OI() {
 		
-		X1.whenPressed(new Rotate(135));
-		Y1.whenPressed(new Move(60));
+		Y1.whenPressed(new Rotate(135));
 		A1.whenPressed(new Rotate(45));
-		B1.whenPressed(new Move(10));
 		
 		LB1.whenPressed(new SetCurrentLimiting());
 		RB1.whenPressed(new SetCurrentLimiting());
 
+		B1.whileHeld(new MoveFlag(0, false, -1));
+		X1.whileHeld(new MoveFlag(0, true, -1));
 		
-		LB2.whenPressed(new IntakeToggle(ToggleType.CLOSE));
-		RB2.whenPressed(new IntakeToggle(ToggleType.OPEN));
+		LB2.whenPressed(new ToggleIntake(ToggleType.CLOSE));
+		RB2.whenPressed(new ToggleIntake(ToggleType.OPEN));
 		
 		A2.whenPressed(new SetRobotState("cube drop"));
-		B2.whileHeld(new SetFlag(0, false, -1));
-		X2.whileHeld(new SetFlag(0, true, -1));
 		Y2.whenPressed(new SetRobotState("rave"));
+		
+		B2.whenPressed(new SetConveyorSpeedLimit(1.0)); // max speed
+		X2.whenPressed(new SetConveyorSpeedLimit(0.5));
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());

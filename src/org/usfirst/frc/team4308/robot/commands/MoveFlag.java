@@ -4,13 +4,13 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetFlag extends Command {
+public class MoveFlag extends Command {
 	
 	private int channel;
 	private boolean set;
 	private boolean useTimeout = true;
 	
-	public SetFlag(int channel, boolean up, double timeout) {
+	public MoveFlag(int channel, boolean up, double timeout) {
 		this.set = up;
 		this.channel = channel;
 		

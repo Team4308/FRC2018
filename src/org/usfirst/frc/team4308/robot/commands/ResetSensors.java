@@ -13,7 +13,6 @@ import org.usfirst.frc.team4308.robot.Robot;
 public class ResetSensors extends Command {
 	public ResetSensors() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.drive);
 		requires(Robot.navx);
 	}
 

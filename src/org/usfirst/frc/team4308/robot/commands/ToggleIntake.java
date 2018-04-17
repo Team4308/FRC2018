@@ -4,7 +4,7 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class IntakeToggle extends Command {
+public class ToggleIntake extends Command {
 	
 	ToggleType setToggle;
 	
@@ -12,7 +12,7 @@ public class IntakeToggle extends Command {
 		OPEN, CLOSE, SWITCH, OFF
 	}
 	
-	public IntakeToggle(ToggleType set) {
+	public ToggleIntake(ToggleType set) {
 		setToggle = set;
 	}
 	

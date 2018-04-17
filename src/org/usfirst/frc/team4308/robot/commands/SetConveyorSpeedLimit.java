@@ -4,28 +4,24 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SwitchCompressor extends Command {
+public class SetConveyorSpeedLimit extends Command {
+	
+	private double limit;
+	
+	public SetConveyorSpeedLimit(double limit) {
+		this.limit = limit;
+	}
 	
 	@Override
 	protected void execute() {
 		super.execute();
 		
-		if(Robot.c != null) {
-			boolean on = Robot.c.enabled();
-			
-			if (on) {
-				Robot.c.setClosedLoopControl(false);
-			}
-			else {
-				Robot.c.setClosedLoopControl(true);
-			}
-		}
+		Robot.conveyor.speedLimit = limit;
 		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

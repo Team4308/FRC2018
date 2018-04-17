@@ -4,11 +4,11 @@ import org.usfirst.frc.team4308.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PullConveyor extends Command {
+public class MoveConveyor extends Command {
 
 	private boolean reversed;
 
-	public PullConveyor(boolean reverse) {
+	public MoveConveyor(boolean reverse) {
 		reversed = reverse;
 	}
 

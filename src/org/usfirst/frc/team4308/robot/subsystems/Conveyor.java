@@ -16,6 +16,8 @@ public class Conveyor extends Subsystem {
 	public WPI_TalonSRX conveyorLeft;
 	public WPI_TalonSRX conveyorRight;
 	
+	public double speedLimit = 1.0;
+	
 	public Conveyor() {
 		conveyorLeft = new WPI_TalonSRX(RobotMap.Conveyor.conveyorLeft);
 		conveyorRight = new WPI_TalonSRX(RobotMap.Conveyor.conveyorRight);
@@ -29,6 +31,8 @@ public class Conveyor extends Subsystem {
 		}
 
 		conveyorRight.setInverted(true);
+		
+		speedLimit = 1.0;
 	}
 	
 	@Override
@@ -50,8 +54,8 @@ public class Conveyor extends Subsystem {
 	}
 
 	public void moveConveyor(double move) {
-		conveyorLeft.set(move);
-		conveyorRight.set(move);
+		conveyorLeft.set(move * speedLimit);
+		conveyorRight.set(move * speedLimit);
 		
 
 		if (move > 0.2) {
