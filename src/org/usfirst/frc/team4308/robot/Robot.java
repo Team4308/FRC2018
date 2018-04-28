@@ -79,19 +79,19 @@ public class Robot extends TimedRobot {
 		auto = null;
 		
 		
-		SmartDashboard.putString("Choose Auto", SmartDashboard.getString("Choose Auto", "B"));
+		SmartDashboard.putString("Choose Auto", SmartDashboard.getString("Choose Auto", "C"));
 		
-		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.07));  // 0.06
+		SmartDashboard.putNumber("RotateP", SmartDashboard.getNumber("RotateP", 0.08));  // 0.06
 		SmartDashboard.putNumber("RotateI", SmartDashboard.getNumber("RotateI", 0.0));
 		SmartDashboard.putNumber("RotateD", SmartDashboard.getNumber("RotateD", 0.35)); // 0.35
 		
-		SmartDashboard.putNumber("RotateLongP", SmartDashboard.getNumber("RotateLongP", 0.07));  // 0.06
+		SmartDashboard.putNumber("RotateLongP", SmartDashboard.getNumber("RotateLongP", 0.08));  // 0.06
 		SmartDashboard.putNumber("RotateLongI", SmartDashboard.getNumber("RotateLongI", 0.0));
 		SmartDashboard.putNumber("RotateLongD", SmartDashboard.getNumber("RotateLongD", 0.5));
 
-		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.03));  // 0.023
+		SmartDashboard.putNumber("MoveP", SmartDashboard.getNumber("MoveP", 0.032));  // 0.023
 		SmartDashboard.putNumber("MoveI", SmartDashboard.getNumber("MoveI", 0.0));
-		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.3));
+		SmartDashboard.putNumber("MoveD", SmartDashboard.getNumber("MoveD", 0.4));
 		
 		
 		SmartDashboard.putBoolean("CurrentLimiting", SmartDashboard.getBoolean("CurrentLimiting", true));
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 			leds.setState("auto right");
 		}
 		
-		String key = SmartDashboard.getString("Position(L,C,R,B):", "B");
+		String key = SmartDashboard.getString("Choose Auto", "C");
 		if(key.startsWith("L")) {
 			auto = new LeftAuto(key.substring(1));
 		} else if (key.startsWith("R")) {

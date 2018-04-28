@@ -22,7 +22,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
-			addSequential(new Move(-19.0)); // Move 19" forward (overshooting 17.75")			
+			addSequential(new Move(-17.75)); // Move 19" forward (overshooting 17.75")			
 			addSequential(new MoveConveyor(1.0), 1.0);
 			
 			// McMaster tested auto
@@ -30,7 +30,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left
 //			addSequential(new Move(-88.0)); // Move 62.25" left and forward
 //			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
-//			addSequential(new Move(-20.0)); // Move 20" forward (overshooting 17.75")			
+//			addSequential(new Move(-20.0)); // Move 20" forward (overshooting 17.75")		
 //			addSequential(new PullConveyor(false), 1.0);
 			
 			// Ryerson tested auto
@@ -40,7 +40,7 @@ public class CenterAuto extends CommandGroup {
 //			addSequential(new Rotate(45.0)); // Rotate 45 degrees right (straighten)
 //			addSequential(new Move(-30.0)); // Move 20" forward (overshooting 17.75")
 //			addSequential(new PullConveyor(false), 2.5);
-			
+									
 			// Reset to center
 			if (key.contains("M")) {
 				addSequential(new Move(60.0));
@@ -55,7 +55,7 @@ public class CenterAuto extends CommandGroup {
 				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(73.0)); // 63 + 20 for robot size - 10 for adjust
 				addSequential(new RotateLong(-135.0));
-				addParallel(new Move(66.0)); // 64 + 2 for a little more
+				addParallel(new Move(68.0)); // 64 + 4 for a little more
 				addSequential(new MoveIntake(-1.0, -1.0), 3.0);
 				
 				if (key.contains("V")) {
@@ -75,13 +75,36 @@ public class CenterAuto extends CommandGroup {
 				
 				if (key.contains("S")) {
 					
-					addParallel(new MoveIntake(-1.0, -1.0), 5.0);
+//					addParallel(new ToggleIntake(ToggleType.CLOSE));
+					addParallel(new MoveIntake(-1.0, -1.0), 1.0);
 					addSequential(new Move(-66.0));
 					addSequential(new RotateLong(135.0));
-					addSequential(new Move(-73.0));
+					addSequential(new Move(-75.0)); // 73 + 2 for adjust
+//					addParallel(new ToggleIntake(ToggleType.OPEN));
 					addParallel(new MoveIntake(-1.0, -1.0), 2.0);
 					addSequential(new MoveConveyor(1.0), 2.0);
 					
+					if (key.contains("3")) {
+					
+//						addParallel(new ToggleIntake(ToggleType.OPEN));
+						addSequential(new Move(52.0)); // 73 - 21
+						addSequential(new RotateLong(-135.0));
+						addParallel(new Move(52.0)); // 66 - 14
+						addSequential(new MoveIntake(-1.0, -1.0), 3.0);
+						
+						if (key.contains("W")) {
+
+//							addParallel(new ToggleIntake(ToggleType.CLOSE));
+							addSequential(new Move(-52.0));
+							addSequential(new RotateLong(135.0));
+							addSequential(new Move(-52.0));
+							addParallel(new ToggleIntake(ToggleType.OPEN));
+							addParallel(new MoveIntake(-1.0, -1.0), 2.0);
+							addSequential(new MoveConveyor(1.0), 2.0);
+							
+						}
+						
+					}
 				}
 				
 			}
@@ -95,7 +118,7 @@ public class CenterAuto extends CommandGroup {
 			addSequential(new Rotate(45.0)); // Rotate 45 degrees right
 			addSequential(new Move(-72.0)); // Move 50.75" left and forward
 			addSequential(new Rotate(-45.0)); // Rotate 45 degrees left (straighten)
-			addSequential(new Move(-31.0)); // Move 31" forward (overshooting 29.25")
+			addSequential(new Move(-29.25)); // Move 31" forward (overshooting 29.25")
 			addSequential(new MoveConveyor(1.0), 1.0);
 			
 			// McMaster tested auto
@@ -128,7 +151,7 @@ public class CenterAuto extends CommandGroup {
 				addParallel(new ToggleIntake(ToggleType.OPEN));
 				addSequential(new Move(73.0)); // 63 + 20
 				addSequential(new RotateLong(135.0));
-				addParallel(new Move(64.0));
+				addParallel(new Move(66.0)); // 62 + 4 for a little more
 				addSequential(new MoveIntake(-1.0, -1.0), 3.0);
 
 				
@@ -149,18 +172,43 @@ public class CenterAuto extends CommandGroup {
 				}
 				
 				if (key.contains("S")) {
-					
-					addParallel(new MoveIntake(-1.0, -1.0), 5.0);
+
+//					addParallel(new ToggleIntake(ToggleType.CLOSE));
+					addParallel(new MoveIntake(-1.0, -1.0), 1.0);
 					addSequential(new Move(-64.0));
 					addSequential(new RotateLong(-135.0));
-					addSequential(new Move(-73.0));
+					addSequential(new Move(-75.0)); // 73 + 2 for adjust
+//					addParallel(new ToggleIntake(ToggleType.OPEN));
 					addParallel(new MoveIntake(-1.0, -1.0), 2.0);
 					addSequential(new MoveConveyor(1.0), 2.0);
+
+					if (key.contains("3")) {
 					
+//						addParallel(new ToggleIntake(ToggleType.OPEN));
+						addSequential(new Move(52.0)); // 73 - 21
+						addSequential(new RotateLong(135.0));
+						addParallel(new Move(52.0)); // 66 - 14
+						addSequential(new MoveIntake(-1.0, -1.0), 3.0);
+						
+						if (key.contains("W")) {
+
+//							addParallel(new ToggleIntake(ToggleType.CLOSE));
+							addSequential(new Move(-52.0));
+							addSequential(new RotateLong(-135.0));
+							addSequential(new Move(-52.0));
+//							addParallel(new ToggleIntake(ToggleType.OPEN));
+							addParallel(new MoveIntake(-1.0, -1.0), 2.0);
+							addSequential(new MoveConveyor(1.0), 2.0);
+							
+						}
+						
+					}
 				}
 				
 			}
 		}
+		
+		addSequential(new MoveFlag(0, true, 1.3));
 		
 	}
 }

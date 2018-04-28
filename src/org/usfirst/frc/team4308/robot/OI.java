@@ -12,8 +12,10 @@ import org.usfirst.frc.team4308.robot.commands.SetConveyorSpeedLimit;
 import org.usfirst.frc.team4308.robot.commands.SetCurrentLimiting;
 import org.usfirst.frc.team4308.robot.commands.MoveFlag;
 import org.usfirst.frc.team4308.robot.commands.SetRobotState;
+import org.usfirst.frc.team4308.robot.auto.CenterAuto;
 import org.usfirst.frc.team4308.robot.auto.Move;
 import org.usfirst.frc.team4308.robot.auto.Rotate;
+import org.usfirst.frc.team4308.robot.auto.RotateLong;
 import org.usfirst.frc.team4308.robot.commands.ToggleIntake;
 import org.usfirst.frc.team4308.robot.commands.ToggleIntake.ToggleType;
 
@@ -28,6 +30,7 @@ public class OI {
 	
 	public static Joystick driveStick = new Joystick(0);
 	public static Joystick controlStick = new Joystick(1);
+	public static Joystick testingStick = new Joystick(2);
 	
 	private JoystickButton A1 = new JoystickButton(driveStick, RobotMap.Control.Standard.a);
 	private JoystickButton B1 = new JoystickButton(driveStick, RobotMap.Control.Standard.b);
@@ -49,16 +52,25 @@ public class OI {
 
 	private JoystickButton Start2 = new JoystickButton(controlStick, RobotMap.Control.Standard.start);
 	
+	private JoystickButton A3 = new JoystickButton(testingStick, RobotMap.Control.Standard.a);
+	private JoystickButton B3 = new JoystickButton(testingStick, RobotMap.Control.Standard.b);
+	private JoystickButton X3 = new JoystickButton(testingStick, RobotMap.Control.Standard.x);
+	private JoystickButton Y3 = new JoystickButton(testingStick, RobotMap.Control.Standard.y);
+	
+	private JoystickButton LB3 = new JoystickButton(testingStick, RobotMap.Control.Standard.leftBumper);
+	private JoystickButton RB3 = new JoystickButton(testingStick, RobotMap.Control.Standard.rightBumper);
+
+	private JoystickButton Start3 = new JoystickButton(testingStick, RobotMap.Control.Standard.start);
+	
 	public OI() {
-		
-		Y1.whenPressed(new Rotate(135));
-		A1.whenPressed(new Rotate(45));
 		
 		LB1.whenPressed(new SetCurrentLimiting());
 		RB1.whenPressed(new SetCurrentLimiting());
 
 		B1.whileHeld(new MoveFlag(0, false, -1));
 		X1.whileHeld(new MoveFlag(0, true, -1));
+		A1.whenPressed(new SetRobotState("cube drop"));
+		Y1.whenPressed(new SetRobotState("rave"));
 		
 		LB2.whenPressed(new ToggleIntake(ToggleType.CLOSE));
 		RB2.whenPressed(new ToggleIntake(ToggleType.OPEN));
@@ -71,6 +83,16 @@ public class OI {
 		
 		Start1.whenPressed(new ResetSensors());
 		Start2.whenPressed(new ResetSensors());
+		Start3.whenPressed(new ResetSensors());
+		
+		LB3.whenPressed(new Rotate(-45.0)); // Left
+		RB3.whenPressed(new Rotate(45.0)); // Right
+		
+		A3.whenPressed(new Move(-60.0));
+		Y3.whenPressed(new Move(60.0));
+		X3.whenPressed(new RotateLong(-135.0));
+		B3.whenPressed(new RotateLong(135.0));
+		
 		
 	}
 	
